@@ -17,7 +17,7 @@
 //-----------------------------------------------------------------------
 
 using System.Collections;
-using Google.XR.Cardboard;
+//using Google.XR.Cardboard;
 using UnityEngine;
 using UnityEngine.XR.Management;
 
