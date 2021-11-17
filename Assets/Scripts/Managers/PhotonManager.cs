@@ -35,7 +35,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private GameObject gameManager;
     private GameObject photonVoiceManager;
     private TypedLobby lobby;
-    private VrModeController vrModeController;
+    //private VrModeController vrModeController;
 
     void Awake()
     {
@@ -51,7 +51,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         RoomInfoList = new Dictionary<string, RoomInfo>();
         PhotonNetwork.AutomaticallySyncScene = true;
         photonVoiceManager = GameObject.Find("PhotonVoiceManager");
-        vrModeController = GetComponent<VrModeController>();
+        //vrModeController = GetComponent<VrModeController>();
         Connect();
     }
 
@@ -282,7 +282,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             }
         }
         
-        vrModeController.EnterVR();
+        //vrModeController.EnterVR();
         
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
@@ -310,7 +310,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion(0, 0.707f, 0, 0.707f), 0);
 
-        vrModeController.EnterVR();
+        //vrModeController.EnterVR();
         
         //enabling audio listener 
         helper.GetComponent<AudioListener>().enabled = true;
@@ -347,7 +347,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             player = PhotonNetwork.Instantiate("HeadsetPlayer", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0); 
         }
         
-        vrModeController.EnterVR();
+        //vrModeController.EnterVR();
         
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;

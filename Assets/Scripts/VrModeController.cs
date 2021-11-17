@@ -23,6 +23,10 @@ using UnityEngine.XR.Management;
 
 namespace VR
 {
+    /* comentado por mi
+     * 
+     * 
+     * 
     /// <summary>
     /// Turns VR mode on and off.
     /// </summary>
@@ -69,7 +73,7 @@ namespace VR
             {
                 Api.ScanDeviceParams();
             }
-        }
+        }*/
 
         /*/// <summary>
     /// Update is called once per frame.
@@ -99,7 +103,10 @@ namespace VR
             }
         }
     }*/
-
+/* comentado por mi
+ * 
+ * 
+ * 
         /// <summary>
         /// Enters VR mode.
         /// </summary>
@@ -161,5 +168,7 @@ namespace VR
             XRGeneralSettings.Instance.Manager.DeinitializeLoader();
             Debug.Log("XR deinitialized.");
         }
-    }
+
+       
+    }*/
 }

@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 {
     private Button newGameButton;
     private Button joinGameButton;
-    private VrModeController vrModeController;
+    //private VrModeController vrModeController;
 
     private void Start()
     {
@@ -21,11 +21,11 @@ public class MainMenu : MonoBehaviour
             Instantiate(Resources.Load<GameObject>("Managers/PhotonManager"));           
 
         AudioManager.instance.PlayMainMenuMusic();
-        vrModeController = GetComponent<VrModeController>();
+        //vrModeController = GetComponent<VrModeController>();
         
         //Switch VR off
         Screen.orientation = ScreenOrientation.Portrait;
-        vrModeController.ExitVR();
+        //vrModeController.ExitVR();
 
         newGameButton = GameObject.Find("NewGameButton").GetComponent<Button>();
         joinGameButton = GameObject.Find("JoinGameButton").GetComponent<Button>();
