@@ -67,7 +67,7 @@ public class LetsGoButton : MonoBehaviour
         PhotonManager.instance.theme = theme;
         
         //Changing orientation before loading scene
-        Screen.orientation = ScreenOrientation.Landscape;
+        //Screen.orientation = ScreenOrientation.Landscape;
         
         PhotonManager.instance.CreateRoom(playerName + " (" + task + " - " + location + " - " + imagesType + ")");
         
