@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
 using UnityEngine.XR.Management;
-using VR;
 
 //General script for MainMenu functionalities
 public class MainMenu : MonoBehaviour

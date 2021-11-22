@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR;
 using UnityEngine.XR.Management;
-using VR;
 
 public class PhotonManager : MonoBehaviourPunCallbacks 
 {
