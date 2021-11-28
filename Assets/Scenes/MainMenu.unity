@@ -605,7 +605,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 272529737807523056, guid: e9af5e640bf65be4d982e5b9bf4e55d3, type: 3}
         m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
-        m_MethodName: LoadNewGameButtonClicked
+        m_MethodName: LoadNewGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1774,7 +1774,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1262416478}
         m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
-        m_MethodName: LoadJoinGameButtonClicked
+        m_MethodName: LoadJoinGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
