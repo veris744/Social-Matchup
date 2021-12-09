@@ -819,7 +819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.048786
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -827,11 +827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9964047
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.08472136
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalRotation.y
@@ -843,7 +843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -9.72
       objectReference: {fileID: 0}
     - target: {fileID: 2606822097700211000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -859,6 +859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
+--- !u!20 &750676638 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2606822096002858899, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
+  m_PrefabInstance: {fileID: 750676637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &906049087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,7 +1690,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 750676638}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
