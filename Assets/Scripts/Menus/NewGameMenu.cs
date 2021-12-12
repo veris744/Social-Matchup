@@ -31,6 +31,12 @@ public class NewGameMenu : MonoBehaviour
         numberOfImages = "4";
         numberOfPlayers = 2;
 
+        PhotonManager.instance.Location = location;
+        PhotonManager.instance.Task = task;
+        PhotonManager.instance.NumberOfImages = System.Convert.ToInt32(numberOfImages);
+        PhotonManager.instance.AudioChat = false;
+        PhotonManager.instance.pvp = false;
+
         PhotonManager.instance.CreateRoom(playerName + " (" + task + " - " + location + ")");
 
     }

@@ -239,7 +239,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         this.NumberOfImages = numberOfElements;
         //this.AudioChat = audioChat;
         this.AudioChat = false;
-        this.pvp = pvp;
+        //this.pvp = pvp;
+        this.pvp = false;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
