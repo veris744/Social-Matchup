@@ -68,7 +68,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
-
+    /*
     void Update()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
@@ -79,7 +79,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
         } 
-    }
+    }*/
 
     private void Connect()
     {
@@ -166,7 +166,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             {
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-                    gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages);
+                    gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
                     Debug.Log(Task + "Gameplay" + Location);
                     PhotonNetwork.LoadLevel(Task + "Gameplay" + Location);
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
@@ -202,7 +202,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         player.GetComponent<AudioListener>().enabled = true;
 
         //audioChat disabled
-        photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
     }
 
@@ -217,10 +217,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         player.GetComponent<AudioListener>().enabled = true;
 
         //no audioChat
-        photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
         Debug.Log("Task: " + Task);
-        gameManager = PhotonNetwork.Instantiate("Managers/" + Task + "GameManager", Vector3.zero, Quaternion.identity, 0);
+        gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
     }
 
