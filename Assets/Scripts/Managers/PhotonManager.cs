@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.PUN;
 using Photon.Voice.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public string theme;
     public int NumberOfImages;
     public byte NumberOfPlayers;
+    public bool AudioChat;
     public bool pvp;
 
     private int order;
@@ -222,15 +224,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
     }
 
-
+    private void EnableAudioChat(GameObject player)
+    {
+        player.GetComponent<Speaker>().enabled = true;
+        player.GetComponent<PhotonVoiceView>().enabled = true;
+        photonVoiceManager.GetComponent<Recorder>().IsRecording = true;
+    }
 
     [PunRPC]
-    public void SetGameParameters(string task, string location, int numberOfElements, bool pvp)
+    public void SetGameParameters(string task, string location, int numberOfElements, bool audioChat, bool pvp)
     {
         this.Task = task;
         this.Location = location;
         this.NumberOfImages = numberOfElements;
         //this.AudioChat = audioChat;
+        this.AudioChat = false;
         this.pvp = pvp;
     }
 
