@@ -168,7 +168,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
                     Debug.Log(Task + "Gameplay" + Location);
-                    PhotonNetwork.LoadLevel(Task + "Gameplay" + Location);
+                    PhotonNetwork.LoadLevel(Task);
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
                 case 2:
