@@ -222,6 +222,18 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
     }
 
+
+
+    [PunRPC]
+    public void SetGameParameters(string task, string location, int numberOfElements, bool pvp)
+    {
+        this.Task = task;
+        this.Location = location;
+        this.NumberOfImages = numberOfElements;
+        //this.AudioChat = audioChat;
+        this.pvp = pvp;
+    }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Updating rooms");

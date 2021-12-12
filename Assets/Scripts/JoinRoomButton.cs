@@ -17,7 +17,7 @@ public class JoinRoomButton : MonoBehaviour
         PhotonManager.instance.JoinRoom(text.text);
 
         GameObject.Find("RoomDisplayer").SetActive(false);
-        GameObject.Find("OpenGamesText").SetActive(false);
+        //GameObject.Find("OpenGamesText").SetActive(false);
         Instantiate(Resources.Load<GameObject>("WaitingAnimation"), GameObject.Find("Canvas").transform);
 
         foreach (GameObject roomButton in GameObject.FindGameObjectsWithTag("JoinRoomButton"))
