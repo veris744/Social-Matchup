@@ -194,7 +194,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, -4), Quaternion.identity, 0);
+            player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
         }
 
 
