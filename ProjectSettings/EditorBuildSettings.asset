@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JoinGameMenu.unity
     guid: 73e5c711c7250134d9276dc029cd0253
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ClassicGame.unity
     guid: 0eafa219d4cfdda4f8ca5e8c1b291b83
+  - enabled: 0
+    path: Assets/Scenes/TestingScene.unity
+    guid: da919d9f884315844860c0aeba446cda
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a2a10834aaeb00d49b1624abd3406d48, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9c86e91c56a8f32418780b656eef534f, type: 2}
