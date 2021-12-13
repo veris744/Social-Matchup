@@ -1,11 +1,14 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.PUN;
 using Photon.Voice.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PhotonManager : MonoBehaviour
+public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public static PhotonManager instance = null;
 
@@ -17,6 +20,7 @@ public class PhotonManager : MonoBehaviour
     public string theme;
     public int NumberOfImages;
     public byte NumberOfPlayers;
+    public bool AudioChat;
     public bool pvp;
 
     private int order;
@@ -45,6 +49,38 @@ public class PhotonManager : MonoBehaviour
         Connect();
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Connected to the server");
+        //helper = null;
+        lobby = new TypedLobby("MyLobby", LobbyType.Default);
+        PhotonNetwork.JoinLobby(lobby);
+    }
+    /*
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            Debug.Log("CurrentLobby: " + PhotonNetwork.CurrentLobby);
+            Debug.Log("Num of players: " + PhotonNetwork.CountOfPlayers);
+            Debug.Log("Num of players in lobby: " + PhotonNetwork.CountOfPlayersOnMaster);
+            Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
+            Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
+        } 
+    }*/
+
     private void Connect()
     {
         PhotonNetwork.NetworkingClient.EnableLobbyStatistics = true;
@@ -56,14 +92,57 @@ public class PhotonManager : MonoBehaviour
         catch (System.Net.Sockets.SocketException e) { Debug.LogError("Connection failed!"); }
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnection cause: "+ cause);
+        
+        //failed to reach photon server
+        if (cause == DisconnectCause.Exception || cause == DisconnectCause.ExceptionOnConnect)
+        {
+            if (SceneManager.GetActiveScene().name != "MainMenu")
+                SceneManager.LoadScene("MainMenu");
+            Debug.Log("Connection failed!");
+        }
+        
+        //disconnection happens after connection setup 
+        else
+        {
+            if (SceneManager.GetActiveScene().name != "MainMenu")
+                SceneManager.LoadScene("MainMenu");
+            Debug.Log("Disconnected from server!");
+        }
+        
+        Connect();
+        Debug.Log("Trying to connnnect...");
+    }
+
     public void CreateRoom(string roomName)
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
-        roomOptions.MaxPlayers = NumberOfPlayers;
-
+        roomOptions.MaxPlayers = 2;
         PhotonNetwork.CreateRoom(roomName, roomOptions, lobby);
+    }
+
+    public void JoinRoom(string RoomName)
+    {
+        PhotonNetwork.JoinRoom(RoomName);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        order = PhotonNetwork.CurrentRoom.PlayerCount;
+        Debug.Log("PlayerCount = " + order);
+        this.gameObject.AddComponent<PhotonView>();
+        gameObject.GetPhotonView().ViewID = PhotonNetwork.CurrentRoom.GetHashCode();
+        StartCoroutine(WaitingForOtherPlayer());
+        /*OnPhotonPlayerConnected(PhotonNetwork.LocalPlayer);*/
+    }
+
+    public override void OnLeftRoom()
+    {
+        Destroy(GetComponent<PhotonView>());
     }
 
     private IEnumerator WaitingForOtherPlayer()
@@ -87,9 +166,9 @@ public class PhotonManager : MonoBehaviour
             {
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-                    gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages);
+                    gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
                     Debug.Log(Task + "Gameplay" + Location);
-                    PhotonNetwork.LoadLevel(Task + "Gameplay" + Location);
+                    PhotonNetwork.LoadLevel(Task+"Game");
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
                 case 2:
@@ -115,7 +194,7 @@ public class PhotonManager : MonoBehaviour
         }
         else
         {
-            player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, -4), Quaternion.identity, 0);
+            player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
         }
 
 
@@ -123,7 +202,7 @@ public class PhotonManager : MonoBehaviour
         player.GetComponent<AudioListener>().enabled = true;
 
         //audioChat disabled
-        photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
     }
 
@@ -138,13 +217,55 @@ public class PhotonManager : MonoBehaviour
         player.GetComponent<AudioListener>().enabled = true;
 
         //no audioChat
-        photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
         Debug.Log("Task: " + Task);
-        gameManager = PhotonNetwork.Instantiate("Managers/" + Task + "GameManager", Vector3.zero, Quaternion.identity, 0);
+        gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
     }
 
+    private void EnableAudioChat(GameObject player)
+    {
+        player.GetComponent<Speaker>().enabled = true;
+        player.GetComponent<PhotonVoiceView>().enabled = true;
+        photonVoiceManager.GetComponent<Recorder>().IsRecording = true;
+    }
+
+    [PunRPC]
+    public void SetGameParameters(string task, string location, int numberOfElements, bool audioChat, bool pvp)
+    {
+        this.Task = task;
+        this.Location = location;
+        this.NumberOfImages = numberOfElements;
+        //this.AudioChat = audioChat;
+        this.AudioChat = false;
+        //this.pvp = pvp;
+        this.pvp = false;
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Debug.Log("Updating rooms");
+        foreach (var info in roomList)
+        {
+            if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
+            {
+                if (RoomInfoList.Keys.Contains(info.Name))
+                {
+                    RoomInfoList.Remove(info.Name);
+                }
+                continue;
+            }
+
+            if (RoomInfoList.Keys.Contains(info.Name)) RoomInfoList[info.Name] = info;
+            else RoomInfoList.Add(info.Name, info);
+        }
+    }
+
+    public override void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
+    {
+        Debug.Log("players in lobby: " + lobbyStatistics.Count);
+    }
 
     public Dictionary<string, RoomInfo> GetRoomList()
     {
