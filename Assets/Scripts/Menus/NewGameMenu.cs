@@ -40,4 +40,9 @@ public class NewGameMenu : MonoBehaviour
         PhotonManager.instance.CreateRoom(playerName + " (" + task + " - " + location + ")");
 
     }
+
+    public void startWaitingAnimation()
+    {
+        Instantiate(Resources.Load<GameObject>("WaitingAnimation"), GameObject.Find("Canvas").transform);
+    }
 }
