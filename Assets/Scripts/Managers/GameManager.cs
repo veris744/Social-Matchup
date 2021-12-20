@@ -11,7 +11,7 @@ public abstract class GameManager : MonoBehaviour
     protected bool pvp;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         Debug.Log("GameManger name: " + gameObject.name);
         //this.pvp = PhotonManager.instance.pvp;
@@ -56,7 +56,7 @@ public abstract class GameManager : MonoBehaviour
         }
 
         //if (thisPlayer == null && players != null) thisPlayer = PhotonManager.instance.Helper;
-        Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
+        //Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 
     /*public void SetPVP(bool pvp)
