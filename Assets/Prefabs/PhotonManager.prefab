@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3892388230702589239}
   - component: {fileID: 9163439876178813205}
+  - component: {fileID: 6548150697286832596}
   m_Layer: 0
   m_Name: PhotonManager
   m_TagString: Untagged
@@ -49,4 +50,13 @@ MonoBehaviour:
   theme: 
   NumberOfImages: 0
   NumberOfPlayers: 0
+  AudioChat: 0
   pvp: 0
+--- !u!81 &6548150697286832596
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2351878552292647037}
+  m_Enabled: 1

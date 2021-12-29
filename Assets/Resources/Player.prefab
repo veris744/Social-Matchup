@@ -463,7 +463,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
+  m_ModelPrefab: {fileID: 2606822096359085936}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
+  m_ModelPrefab: {fileID: 2606822096411857679}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 1034556937172239350}
   - component: {fileID: 4005597360993679118}
   - component: {fileID: 92559887309856496}
-  - component: {fileID: 7297848576988201886}
+  - component: {fileID: 8652810322869999713}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1691,7 +1691,7 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
---- !u!81 &7297848576988201886
+--- !u!81 &8652810322869999713
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -69,18 +69,25 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
-    /*
+    
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu")
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+
+            if (PhotonNetwork.InRoom)
+                PhotonNetwork.LeaveRoom();
+        }
+        /*if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             Debug.Log("CurrentLobby: " + PhotonNetwork.CurrentLobby);
             Debug.Log("Num of players: " + PhotonNetwork.CountOfPlayers);
             Debug.Log("Num of players in lobby: " + PhotonNetwork.CountOfPlayersOnMaster);
             Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
-        } 
-    }*/
+        } */
+    }
 
     private void Connect()
     {
@@ -222,7 +229,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         Debug.Log("Task: " + Task);
         gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
-        //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
+        gameManager.GetComponent<GameManager>().SetPVP(pvp);
     }
 
     private void EnableAudioChat(GameObject player)
