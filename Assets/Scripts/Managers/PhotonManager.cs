@@ -141,7 +141,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         order = PhotonNetwork.CurrentRoom.PlayerCount;
-        Debug.Log("PlayerCount = " + order);
+        //Debug.Log("PlayerCount = " + order);
         this.gameObject.AddComponent<PhotonView>();
         gameObject.GetPhotonView().ViewID = PhotonNetwork.CurrentRoom.GetHashCode();
         StartCoroutine(WaitingForOtherPlayer());
@@ -164,9 +164,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     void OnPhotonPlayerConnected(Photon.Realtime.Player newPlayer)
     {
-        Debug.Log("MaxPLayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
+        //Debug.Log("MaxPLayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
         int nPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
-        Debug.Log(nPlayers);
         if (nPlayers == PhotonNetwork.CurrentRoom.MaxPlayers) //if all the players are connected
         {
             //no helper no PVP
@@ -174,8 +173,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             {
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+                    //PhotonNetwork.AllocateViewID(gameObject.GetPhotonView());
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
-                    Debug.Log(Task + "Gameplay" + Location);
+                    //Debug.Log(Task + "Gameplay" + Location);
                     PhotonNetwork.LoadLevel(Task+"Game");
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
@@ -191,7 +191,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         GameObject player;
         yield return new WaitForSeconds(5f);
-
+        Debug.Log("Player Number: " + playerNumber);
         if (playerNumber == 0)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
@@ -227,9 +227,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //no audioChat
         //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
-        Debug.Log("Task: " + Task);
+        //Debug.Log("Task: " + Task);
         gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
-        gameManager.GetComponent<GameManager>().SetPVP(pvp);
+        //gameManager.GetComponent<GameManager>().SetPVP(pvp);
     }
 
     private void EnableAudioChat(GameObject player)
@@ -245,15 +245,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         this.Task = task;
         this.Location = location;
         this.NumberOfImages = numberOfElements;
-        //this.AudioChat = audioChat;
-        this.AudioChat = false;
-        //this.pvp = pvp;
-        this.pvp = false;
+        this.AudioChat = audioChat;
+        this.pvp = pvp;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("Updating rooms");
+        //Debug.Log("Updating rooms");
         foreach (var info in roomList)
         {
             if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
@@ -272,7 +270,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
     {
-        Debug.Log("players in lobby: " + lobbyStatistics.Count);
+        //Debug.Log("players in lobby: " + lobbyStatistics.Count);
     }
 
     public Dictionary<string, RoomInfo> GetRoomList()
@@ -280,7 +278,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         int i = 0;
         foreach (var room in RoomInfoList.Keys)
         {
-            Debug.Log("RoomInfo[" + i + "]: " + room);
+            //Debug.Log("RoomInfo[" + i + "]: " + room);
             i++;
         }
         return RoomInfoList;
