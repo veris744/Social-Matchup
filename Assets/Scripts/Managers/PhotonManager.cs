@@ -164,7 +164,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     void OnPhotonPlayerConnected(Photon.Realtime.Player newPlayer)
     {
-        //Debug.Log("MaxPLayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
+        //Debug.Log("MaxPlayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
         int nPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
         if (nPlayers == PhotonNetwork.CurrentRoom.MaxPlayers) //if all the players are connected
         {
@@ -173,7 +173,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             {
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-                    //PhotonNetwork.AllocateViewID(gameObject.GetPhotonView());
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
                     //Debug.Log(Task + "Gameplay" + Location);
                     PhotonNetwork.LoadLevel(Task+"Game");
