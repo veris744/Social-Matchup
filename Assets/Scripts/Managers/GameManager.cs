@@ -41,7 +41,7 @@ public abstract class GameManager : MonoBehaviour
             }
             else if (pvp && players.Length == 4)
             {
-                Debug.Log("Giocatori trovati - PVP");
+                Debug.Log("Player found - PVP");
 
                 foreach (GameObject player in players)
                 {
@@ -59,10 +59,10 @@ public abstract class GameManager : MonoBehaviour
         Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 
-    /*public void SetPVP(bool pvp)
+    public void SetPVP(bool pvp)
     {
         this.pvp = pvp;
-    }*/
+    }
 
     protected abstract void SetUpGame();
 
