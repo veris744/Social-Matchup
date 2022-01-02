@@ -23,6 +23,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public bool AudioChat;
     public bool pvp;
 
+    private GameObject helper;
+
     private int order;
     private GameObject gameManager;
     private GameObject photonVoiceManager;
@@ -40,8 +42,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     
     void Start()
     {
-        this.pvp = false;       //no pvp yet
-
         DontDestroyOnLoad(this.gameObject);
         RoomInfoList = new Dictionary<string, RoomInfo>();
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -65,7 +65,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to the server");
-        //helper = null;
+        helper = null;
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
@@ -129,7 +129,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
-        roomOptions.MaxPlayers = 2;
+        roomOptions.MaxPlayers = NumberOfPlayers;
+
         PhotonNetwork.CreateRoom(roomName, roomOptions, lobby);
     }
 
@@ -141,7 +142,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         order = PhotonNetwork.CurrentRoom.PlayerCount;
-        //Debug.Log("PlayerCount = " + order);
+        Debug.Log("PlayerCount = " + order);
         this.gameObject.AddComponent<PhotonView>();
         gameObject.GetPhotonView().ViewID = PhotonNetwork.CurrentRoom.GetHashCode();
         StartCoroutine(WaitingForOtherPlayer());
@@ -164,7 +165,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     void OnPhotonPlayerConnected(Photon.Realtime.Player newPlayer)
     {
-        //Debug.Log("MaxPlayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
+
         int nPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
         if (nPlayers == PhotonNetwork.CurrentRoom.MaxPlayers) //if all the players are connected
         {
@@ -174,7 +175,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
-                    //Debug.Log(Task + "Gameplay" + Location);
                     PhotonNetwork.LoadLevel(Task+"Game");
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
@@ -206,10 +206,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
 
         //enabling audio listener 
-        player.GetComponent<AudioListener>().enabled = true;
+        //player.GetComponent<AudioListener>().enabled = true;
 
-        //audioChat disabled
-        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+
+        //enabling audioChat
+        if (AudioChat) EnableAudioChat(player);
+        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+
 
     }
 
@@ -223,10 +226,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
 
-        //no audioChat
-        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //enabling audioChat
+        if (AudioChat) EnableAudioChat(player);
+        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
-        //Debug.Log("Task: " + Task);
+
         gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);
     }
