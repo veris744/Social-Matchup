@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {
+    {   /*
         if (!isAssigned & players.Length == 2)
         {
             foreach (GameObject player in players)
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             }
             isAssigned = true;
         }
-        
+        */
 
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
