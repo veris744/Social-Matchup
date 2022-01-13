@@ -36,13 +36,17 @@ public class GameManager : MonoBehaviour
                 {
                     CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                     player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(false);
+                    player.SetActive(false);
+
                     Debug.Log("Player: " + player.GetPhotonView().IsMine);
+                    
                     if (player.GetPhotonView().IsMine)
                     {
                         Debug.Log("Player Mine: " + player.GetInstanceID());
                         thisPlayer = player.gameObject;
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
+                        player.SetActive(true);
                         player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
                     }
                 }
