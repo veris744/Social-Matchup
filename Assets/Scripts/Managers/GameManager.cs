@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
@@ -58,7 +58,6 @@ public abstract class GameManager : MonoBehaviour
                         thisPlayer = player.gameObject;
                 }
 
-                SetUpGame();
             }
             else if (pvp && players.Length == 4)
             {
@@ -72,7 +71,6 @@ public abstract class GameManager : MonoBehaviour
                     }
                 }
 
-                SetUpGame();
             }
         }
 
@@ -85,7 +83,6 @@ public abstract class GameManager : MonoBehaviour
         this.pvp = pvp;
     }
 
-    protected abstract void SetUpGame();
 
     [PunRPC]
     public void StartVictoryAnimations()

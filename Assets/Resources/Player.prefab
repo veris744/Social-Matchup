@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28005e5958ffe4246b73e2721eae8756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 2606822096002858900}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &2606822096359085937
 GameObject:
