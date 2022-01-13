@@ -22,26 +22,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {   /*
-        if (!isAssigned & players.Length == 2)
-        {
-            foreach (GameObject player in players)
-            {
-                Debug.Log("PLAYER ID VIEW: " + player.GetPhotonView().GetInstanceID());
-                if (player.GetPhotonView().IsMine)
-                {
-                    Debug.Log("PLAYER ID VIEW MINE: " + player.GetPhotonView().GetInstanceID());
-                    CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera")
-                        .gameObject.GetComponent<CameraController>();
-                    cameraController.enabled = true;
-                    cameraController.SetTarget(player.transform);
-                    player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
-                }
-            }
-            isAssigned = true;
-        }
-        */
-
+    {   
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
@@ -49,13 +30,16 @@ public class GameManager : MonoBehaviour
 
             if (!pvp && players.Length == 2)
             {
-                Debug.Log("Player found");
+                //Debug.Log("Player found");
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("Player: " + player.name);
+                    Debug.Log("Player: " + player.GetInstanceID());
                     if (player.GetPhotonView().IsMine)
+                    {
                         thisPlayer = player.gameObject;
+                        Debug.Log("Player Mine: " + player.GetInstanceID());
+                    }
                 }
 
             }
