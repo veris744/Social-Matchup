@@ -34,11 +34,11 @@ public class GameManager : MonoBehaviour
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("Player: " + player.GetInstanceID());
+                    Debug.Log("Player: " + player.GetInstanceID() + " - " + player.GetPhotonView().IsMine);
                     if (player.GetPhotonView().IsMine)
                     {
-                        thisPlayer = player.gameObject;
                         Debug.Log("Player Mine: " + player.GetInstanceID());
+                        thisPlayer = player.gameObject;
                     }
                 }
 
