@@ -193,10 +193,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("Player Number: " + playerNumber);
         if (playerNumber == 0)
         {
-            Debug.Log("Player0");
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
-            if (!player.GetPhotonView().IsMine)
+            if (player.GetPhotonView().IsMine)
             {
+                Debug.Log("Player0");
                 CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(player.transform);
@@ -245,10 +245,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5f);
         GameObject player;
 
-        Debug.Log("PlayerInst");
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
-        if (!player.GetPhotonView().IsMine)
+        if (player.GetPhotonView().IsMine)
         {
+            Debug.Log("PlayerInst");
             CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
             cameraController.enabled = true;
             cameraController.SetTarget(player.transform);

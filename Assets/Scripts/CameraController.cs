@@ -13,8 +13,4 @@ public class CameraController : MonoBehaviour
         this.target = target;
     }
 
-    public void LateUpdate()
-    {
-        //camera.transform.position = target.position + offset;
-    }
 }
