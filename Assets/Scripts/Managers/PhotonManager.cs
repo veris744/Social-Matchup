@@ -197,7 +197,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
             if (player.GetPhotonView().IsMine)
             {
-                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(player.transform);
                 player.transform.Find("Main Camera").gameObject.SetActive(true);
@@ -249,7 +249,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
         if (player.GetPhotonView().IsMine)
         {
-            CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+            CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
             cameraController.enabled = true;
             cameraController.SetTarget(player.transform);
             player.transform.Find("Main Camera").gameObject.SetActive(true);
