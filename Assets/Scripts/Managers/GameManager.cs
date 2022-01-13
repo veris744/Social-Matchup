@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
-            players = GameObject.FindGameObjectsWithTag("MainCamera");
+            players = GameObject.FindGameObjectsWithTag("Player");
 
             if (!pvp && players.Length == 2)
             {
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("PlayerX");
                     Debug.Log("Player: " + player.GetPhotonView().IsMine);
                     if (player.GetPhotonView().IsMine)
                     {
