@@ -30,11 +30,12 @@ public class GameManager : MonoBehaviour
 
             if (!pvp && players.Length == 2)
             {
-                //Debug.Log("Player found");
+                Debug.Log("Player found");
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("Player: " + player.GetInstanceID() + " - " + player.GetPhotonView().IsMine);
+                    Debug.Log("PlayerX");
+                    Debug.Log("Player: " + player.GetPhotonView().IsMine);
                     if (player.GetPhotonView().IsMine)
                     {
                         Debug.Log("Player Mine: " + player.GetInstanceID());
