@@ -16,6 +16,20 @@ public abstract class GameManager : MonoBehaviour
         Debug.Log("GameManger name: " + gameObject.name);
         //this.pvp = PhotonManager.instance.pvp;
         this.pvp = false; //pvp always false for now only 2 players
+
+        foreach (GameObject player in players)
+        {
+            Debug.Log("PLAYER ID VIEW: " + player.GetPhotonView().GetInstanceID());
+            if (player.GetPhotonView().IsMine)
+            {
+                Debug.Log("PLAYER ID VIEW MINE: " + player.GetPhotonView().GetInstanceID());
+                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera")
+                    .gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame
