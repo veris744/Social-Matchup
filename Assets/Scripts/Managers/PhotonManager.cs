@@ -23,8 +23,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public bool AudioChat;
     public bool pvp;
 
-    private GameObject helper;
-
     private int order;
     private GameObject gameManager;
     private GameObject photonVoiceManager;
@@ -42,6 +40,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     
     void Start()
     {
+        this.pvp = false;       //no pvp yet
+
         DontDestroyOnLoad(this.gameObject);
         RoomInfoList = new Dictionary<string, RoomInfo>();
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -65,29 +65,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to the server");
-        helper = null;
+        //helper = null;
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
-    
+    /*
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-
-            if (PhotonNetwork.InRoom)
-                PhotonNetwork.LeaveRoom();
-        }
-        /*if (SceneManager.GetActiveScene().name != "MainMenu")
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             Debug.Log("CurrentLobby: " + PhotonNetwork.CurrentLobby);
             Debug.Log("Num of players: " + PhotonNetwork.CountOfPlayers);
             Debug.Log("Num of players in lobby: " + PhotonNetwork.CountOfPlayersOnMaster);
             Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
-        } */
-    }
+        } 
+    }*/
 
     private void Connect()
     {
@@ -129,8 +122,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
-        roomOptions.MaxPlayers = NumberOfPlayers;
-
+        roomOptions.MaxPlayers = 2;
         PhotonNetwork.CreateRoom(roomName, roomOptions, lobby);
     }
 
@@ -165,8 +157,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     void OnPhotonPlayerConnected(Photon.Realtime.Player newPlayer)
     {
-
+        Debug.Log("MaxPLayers = " + PhotonNetwork.CurrentRoom.MaxPlayers);
         int nPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+        Debug.Log(nPlayers);
         if (nPlayers == PhotonNetwork.CurrentRoom.MaxPlayers) //if all the players are connected
         {
             //no helper no PVP
@@ -175,6 +168,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
+                    Debug.Log(Task + "Gameplay" + Location);
                     PhotonNetwork.LoadLevel(Task+"Game");
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
@@ -190,53 +184,26 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         GameObject player;
         yield return new WaitForSeconds(5f);
-        Debug.Log("Player Number: " + playerNumber);
+
         if (playerNumber == 0)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
-            /*if (player.GetPhotonView().IsMine)
-            {
-                Debug.Log("Player0");
-                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
-                cameraController.enabled = true;
-                cameraController.SetTarget(player.transform);
-                player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
-            } */
         }
         else if (playerNumber == 1)
         {
-            Debug.Log("Player1");
             player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, 4), Quaternion.identity, 0);
-            if (player.GetPhotonView().IsMine)
-            {
-                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
-                cameraController.enabled = true;
-                cameraController.SetTarget(player.transform);
-                player.transform.Find("Main Camera").gameObject.SetActive(true);
-            }
         }
         else
         {
-            Debug.Log("Player2");
             player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
-            if (player.GetPhotonView().IsMine)
-            {
-                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
-                cameraController.enabled = true;
-                cameraController.SetTarget(player.transform);
-                player.transform.Find("Main Camera").gameObject.SetActive(true);
-            }
         }
 
 
         //enabling audio listener 
-        //player.GetComponent<AudioListener>().enabled = true;
+        player.GetComponent<AudioListener>().enabled = true;
 
-
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(player);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
-
+        //audioChat disabled
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
     }
 
@@ -246,25 +213,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
 
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
-        /*if (player.GetPhotonView().IsMine)
-        {
-            Debug.Log("PlayerInst");
-            CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
-            cameraController.enabled = true;
-            cameraController.SetTarget(player.transform);
-            player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
-        }*/
-
+        
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
 
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(player);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //no audioChat
+        //photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
-
+        Debug.Log("Task: " + Task);
         gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
-        //gameManager.GetComponent<GameManager>().SetPVP(pvp);
+        //gameManager.GetComponent<GameManager>().SetPVP(pvp);  PVP always false for now
     }
 
     private void EnableAudioChat(GameObject player)
@@ -280,13 +238,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         this.Task = task;
         this.Location = location;
         this.NumberOfImages = numberOfElements;
-        this.AudioChat = audioChat;
-        this.pvp = pvp;
+        //this.AudioChat = audioChat;
+        this.AudioChat = false;
+        //this.pvp = pvp;
+        this.pvp = false;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        //Debug.Log("Updating rooms");
+        Debug.Log("Updating rooms");
         foreach (var info in roomList)
         {
             if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
@@ -305,7 +265,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
     {
-        //Debug.Log("players in lobby: " + lobbyStatistics.Count);
+        Debug.Log("players in lobby: " + lobbyStatistics.Count);
     }
 
     public Dictionary<string, RoomInfo> GetRoomList()
@@ -313,7 +273,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         int i = 0;
         foreach (var room in RoomInfoList.Keys)
         {
-            //Debug.Log("RoomInfo[" + i + "]: " + room);
+            Debug.Log("RoomInfo[" + i + "]: " + room);
             i++;
         }
         return RoomInfoList;
