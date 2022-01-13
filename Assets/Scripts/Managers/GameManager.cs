@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
     protected bool pvp;
+    private bool isAssigned;
 
     // Start is called before the first frame update
     void Start()
@@ -16,15 +17,16 @@ public abstract class GameManager : MonoBehaviour
         Debug.Log("GameManger name: " + gameObject.name);
         //this.pvp = PhotonManager.instance.pvp;
         this.pvp = false; //pvp always false for now only 2 players
+        isAssigned = false;
     }
 
     // Update is called once per frame
     private void Update()
-    {
+    {   
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
-            players = GameObject.FindGameObjectsWithTag("MainCamera");
+            players = GameObject.FindGameObjectsWithTag("Player");
 
             if (!pvp && players.Length == 2)
             {
@@ -32,12 +34,23 @@ public abstract class GameManager : MonoBehaviour
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("Player: " + player.name);
+                    CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                    player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(false);
+                    player.SetActive(false);
+
+                    Debug.Log("Player: " + player.GetPhotonView().IsMine);
+                    
                     if (player.GetPhotonView().IsMine)
+                    {
+                        Debug.Log("Player Mine: " + player.GetInstanceID());
                         thisPlayer = player.gameObject;
+                        cameraController.enabled = true;
+                        cameraController.SetTarget(player.transform);
+                        player.SetActive(true);
+                        player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+                    }
                 }
 
-                SetUpGame();
             }
             else if (pvp && players.Length == 4)
             {
@@ -51,7 +64,6 @@ public abstract class GameManager : MonoBehaviour
                     }
                 }
 
-                SetUpGame();
             }
         }
 
@@ -64,7 +76,6 @@ public abstract class GameManager : MonoBehaviour
         this.pvp = pvp;
     }
 
-    protected abstract void SetUpGame();
 
     [PunRPC]
     public void StartVictoryAnimations()

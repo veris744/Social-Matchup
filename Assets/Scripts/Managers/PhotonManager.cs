@@ -194,14 +194,38 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (playerNumber == 0)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
+            /*if (player.GetPhotonView().IsMine)
+            {
+                Debug.Log("Player0");
+                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+            } */
         }
         else if (playerNumber == 1)
         {
+            Debug.Log("Player1");
             player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, 4), Quaternion.identity, 0);
+            if (player.GetPhotonView().IsMine)
+            {
+                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Main Camera").gameObject.SetActive(true);
+            }
         }
         else
         {
+            Debug.Log("Player2");
             player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
+            if (player.GetPhotonView().IsMine)
+            {
+                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Main Camera").gameObject.SetActive(true);
+            }
         }
 
 
@@ -222,7 +246,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
 
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
-        
+        /*if (player.GetPhotonView().IsMine)
+        {
+            Debug.Log("PlayerInst");
+            CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+            cameraController.enabled = true;
+            cameraController.SetTarget(player.transform);
+            player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+        }*/
+
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
 
