@@ -9,6 +9,7 @@ public abstract class GameManager : MonoBehaviour
     protected GameObject[] players;
     protected GameObject thisPlayer;
     protected bool pvp;
+    private bool isAssigned;
 
     // Start is called before the first frame update
     void Start()
@@ -16,25 +17,31 @@ public abstract class GameManager : MonoBehaviour
         Debug.Log("GameManger name: " + gameObject.name);
         //this.pvp = PhotonManager.instance.pvp;
         this.pvp = false; //pvp always false for now only 2 players
-
-        foreach (GameObject player in players)
-        {
-            Debug.Log("PLAYER ID VIEW: " + player.GetPhotonView().GetInstanceID());
-            if (player.GetPhotonView().IsMine)
-            {
-                Debug.Log("PLAYER ID VIEW MINE: " + player.GetPhotonView().GetInstanceID());
-                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera")
-                    .gameObject.GetComponent<CameraController>();
-                cameraController.enabled = true;
-                cameraController.SetTarget(player.transform);
-                player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
-            }
-        }
+        isAssigned = false;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (!isAssigned & players.Length == 2)
+        {
+            foreach (GameObject player in players)
+            {
+                Debug.Log("PLAYER ID VIEW: " + player.GetPhotonView().GetInstanceID());
+                if (player.GetPhotonView().IsMine)
+                {
+                    Debug.Log("PLAYER ID VIEW MINE: " + player.GetPhotonView().GetInstanceID());
+                    CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera")
+                        .gameObject.GetComponent<CameraController>();
+                    cameraController.enabled = true;
+                    cameraController.SetTarget(player.transform);
+                    player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+                }
+            }
+            isAssigned = true;
+        }
+        
+
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
