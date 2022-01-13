@@ -173,7 +173,7 @@ public class OldClassicGameManager : GameManager
         if (numberOfDestroyedImagesTeam1 == PhotonManager.instance.NumberOfImages && numberOfDestroyedImagesTeam2 == PhotonManager.instance.NumberOfImages)
             this.gameObject.GetPhotonView().RPC("StartVictoryAnimations", RpcTarget.All);
     }
-
+    /*
     protected override void SetUpGame()
     {
         Debug.Log("SetUpGame");
@@ -182,4 +182,5 @@ public class OldClassicGameManager : GameManager
             SpawnRandomImages();
         }
     }
+    */
 }

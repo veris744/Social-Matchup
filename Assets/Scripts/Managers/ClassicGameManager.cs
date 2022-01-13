@@ -10,9 +10,4 @@ public class ClassicGameManager : GameManager
     public override void Start()
     {
     }
-
-    protected override void SetUpGame()
-    {
-        throw new System.NotImplementedException();
-    }
 }
