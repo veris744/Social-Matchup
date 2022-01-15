@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
@@ -12,7 +12,7 @@ public abstract class GameManager : MonoBehaviour
     private bool isAssigned;
 
     // Start is called before the first frame update
-    public virtual void Start()
+    void Start()
     {
         Debug.Log("GameManger name: " + gameObject.name);
         //this.pvp = PhotonManager.instance.pvp;
@@ -50,7 +50,7 @@ public abstract class GameManager : MonoBehaviour
                         player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
                     }
                 }
-                SetUpGame();
+
             }
             else if (pvp && players.Length == 4)
             {
@@ -63,7 +63,7 @@ public abstract class GameManager : MonoBehaviour
                         thisPlayer = player.gameObject;
                     }
                 }
-                SetUpGame();
+
             }
         }
 
@@ -75,8 +75,6 @@ public abstract class GameManager : MonoBehaviour
     {
         this.pvp = pvp;
     }
-
-    protected abstract void SetUpGame();
 
 
     [PunRPC]
