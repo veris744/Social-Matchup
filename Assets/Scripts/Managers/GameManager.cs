@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         helper = GameObject.FindGameObjectWithTag("Helper");
         helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-        if (helper.getPhotonView().isMine())
+        if (helper.GetPhotonView().IsMine)
         {
             thisPlayer = PhotonManager.instance.Helper;
             Debug.Log("Player Mine: " + helper.GetInstanceID());
