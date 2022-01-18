@@ -32,7 +32,7 @@ public class ClassicGameManager : MonoBehaviour
             Destroy(GameObject.Find("angry2").gameObject);
         }
 
-        if (GameObject.FindGameObjectsWithTag("Emoji"))
+        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
         {
             victory();
         }
