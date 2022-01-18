@@ -25,8 +25,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private GameObject helper;
 
-    public GameObject Helper => helper;
-
     private int order;
     private GameObject gameManager;
     private GameObject photonVoiceManager;
@@ -89,8 +87,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
         } */
-
-        //Debug.Log("Task: " + Task + " - Number of Images: " + NumberOfImages + " - Audio chat: " + AudioChat + " - Number of players: " + NumberOfPlayers);
     }
 
     private void Connect()
@@ -185,9 +181,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 case 2:
                     StartCoroutine(StartGameAsPlayer(0));
                     break;
-                case 3:
-                    StartCoroutine(StartGameAsHelper());
-                    break;
             }
 
         }
@@ -197,51 +190,51 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         GameObject player;
         yield return new WaitForSeconds(5f);
-
+        Debug.Log("Player Number: " + playerNumber);
         if (playerNumber == 0)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-
+            /*if (player.GetPhotonView().IsMine)
+            {
+                Debug.Log("Player0");
+                CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+            } */
         }
         else if (playerNumber == 1)
         {
+            Debug.Log("Player1");
             player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, 4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-
+            if (player.GetPhotonView().IsMine)
+            {
+                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Main Camera").gameObject.SetActive(true);
+            }
         }
         else
         {
+            Debug.Log("Player2");
             player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-
+            if (player.GetPhotonView().IsMine)
+            {
+                CameraController cameraController = player.transform.Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(player.transform);
+                player.transform.Find("Main Camera").gameObject.SetActive(true);
+            }
         }
 
 
         //enabling audio listener 
-        player.GetComponent<AudioListener>().enabled = false;
+        //player.GetComponent<AudioListener>().enabled = true;
 
 
         //enabling audioChat
         if (AudioChat) EnableAudioChat(player);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
-
-
-    }
-
-    IEnumerator StartGameAsHelper()
-    {
-        yield return new WaitForSeconds(5f);
-
-        helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion(0, 0.707f, 0, 0.707f), 0);
-        helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-
-
-        //enabling audio listener 
-        helper.GetComponent<AudioListener>().enabled = false;
-
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(helper);
         else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
 
@@ -253,7 +246,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
 
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
-        player.transform.Find("Camera Offset").gameObject.SetActive(false);
+        /*if (player.GetPhotonView().IsMine)
+        {
+            Debug.Log("PlayerInst");
+            CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+            cameraController.enabled = true;
+            cameraController.SetTarget(player.transform);
+            player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+        }*/
 
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
