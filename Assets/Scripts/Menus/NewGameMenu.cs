@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class NewGameMenu : MonoBehaviour
 {
-    private string playerName, task, numberOfImages;
+    private string playerName, task, location, numberOfImages;
     private byte numberOfPlayers;
-    private bool audioChat, hasHelper;
+    private bool audioChat;
 
     
     // Start is called before the first frame update
@@ -29,17 +29,13 @@ public class NewGameMenu : MonoBehaviour
 
         audioChat = GameObject.Find("AudioChatToggle").GetComponent<Toggle>().isOn;
 
-        hasHelper = GameObject.Find("HelperToggle").GetComponent<Toggle>().isOn;
 
-
+        //Default values for 1st version, notPVP, notHelper
         task = "Classic";
+        location = "Castle";
+        numberOfPlayers = 2;
 
-        if (hasHelper)
-            numberOfPlayers = 3;
-        else
-            numberOfPlayers = 2;
-
-        PhotonManager.instance.Location = "Castle";
+        PhotonManager.instance.Location = location;
         PhotonManager.instance.Task = task;
         PhotonManager.instance.NumberOfImages = System.Convert.ToInt32(numberOfImages);
         PhotonManager.instance.AudioChat = audioChat;
@@ -48,6 +44,11 @@ public class NewGameMenu : MonoBehaviour
 
         PhotonManager.instance.CreateRoom(playerName + " (" + task + " - " + numberOfImages + ")");
 
+    }
+
+    public void startWaitingAnimation()
+    {
+        Instantiate(Resources.Load<GameObject>("WaitingAnimation"), GameObject.Find("Canvas").transform);
     }
 
 }

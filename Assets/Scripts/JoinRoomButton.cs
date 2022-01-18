@@ -18,7 +18,7 @@ public class JoinRoomButton : MonoBehaviour
 
         GameObject.Find("RoomDisplayer").SetActive(false);
         //GameObject.Find("OpenGamesText").SetActive(false);
-        //Instantiate(Resources.Load<GameObject>("WaitingAnimation"), GameObject.Find("Canvas").transform);
+        Instantiate(Resources.Load<GameObject>("WaitingAnimation"), GameObject.Find("Canvas").transform);
 
         foreach (GameObject roomButton in GameObject.FindGameObjectsWithTag("JoinRoomButton"))
             Destroy(roomButton);
