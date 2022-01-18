@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
+    protected GameObject helper;
     protected bool pvp;
 
     // Start is called before the first frame update
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
                 foreach (GameObject player in players)
                 {
                     Debug.Log("Player: " + player.GetPhotonView().IsMine);
-                    
+                    player.transform.Find("Camera Offset").gameObject.SetActive(false);
+
                     if (player.GetPhotonView().IsMine)
                     {
                         Debug.Log("Player Mine: " + player.GetInstanceID());
@@ -47,8 +49,26 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        
+        if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
+        {
+            helper = GameObject.FindGameObjectsWithTag("Helper")[0];
+            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
+            if (helper.GetPhotonView().IsMine)
+            {
+                thisPlayer = PhotonManager.instance.Helper;
+                Debug.Log("Player Mine: " + helper.GetInstanceID());
+                thisPlayer = helper.gameObject;
 
-        if (thisPlayer == null && players != null) thisPlayer = PhotonManager.instance.Helper;
+                helper.transform.Find("Camera Offset").gameObject.SetActive(true);
+                CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(helper.transform);
+            }
+        }
+
+        
+
         Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 

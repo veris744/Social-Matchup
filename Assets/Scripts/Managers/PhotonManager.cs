@@ -201,19 +201,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (playerNumber == 0)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
 
         }
         else if (playerNumber == 1)
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, 4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
 
         }
         else
         {
             player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
 
         }
 
@@ -233,8 +230,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(5f);
 
-        helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion(0, 0.707f, 0, 0.707f), 0);
-        helper.transform.Find("Camera Offset").gameObject.SetActive(false);
+        helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion.identity, 0);
 
 
         //enabling audio listener 
@@ -253,7 +249,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
 
         player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
-        player.transform.Find("Camera Offset").gameObject.SetActive(false);
 
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
