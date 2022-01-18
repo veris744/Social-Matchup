@@ -8,16 +8,14 @@ public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
+    protected GameObject helper;
     protected bool pvp;
-    private bool isAssigned;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("GameManger name: " + gameObject.name);
-        //this.pvp = PhotonManager.instance.pvp;
-        this.pvp = false; //pvp always false for now only 2 players
-        isAssigned = false;
+        this.pvp = PhotonManager.instance.pvp;
     }
 
     // Update is called once per frame
@@ -34,40 +32,43 @@ public class GameManager : MonoBehaviour
 
                 foreach (GameObject player in players)
                 {
-                    CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
-                    player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(false);
-                    player.SetActive(false);
-
                     Debug.Log("Player: " + player.GetPhotonView().IsMine);
-                    
+                    player.transform.Find("Camera Offset").gameObject.SetActive(false);
+
                     if (player.GetPhotonView().IsMine)
                     {
                         Debug.Log("Player Mine: " + player.GetInstanceID());
                         thisPlayer = player.gameObject;
+
+                        player.transform.Find("Camera Offset").gameObject.SetActive(true);
+                        CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
-                        player.SetActive(true);
-                        player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
-                    }
-                }
-
-            }
-            else if (pvp && players.Length == 4)
-            {
-                Debug.Log("Player found - PVP");
-
-                foreach (GameObject player in players)
-                {
-                    if (player.GetPhotonView().IsMine)
-                    {
-                        thisPlayer = player.gameObject;
                     }
                 }
 
             }
         }
+        
+        if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
+        {
+            helper = GameObject.FindGameObjectsWithTag("Helper")[0];
+            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
+            if (helper.GetPhotonView().IsMine)
+            {
+                thisPlayer = PhotonManager.instance.Helper;
+                Debug.Log("Player Mine: " + helper.GetInstanceID());
+                thisPlayer = helper.gameObject;
 
-        //if (thisPlayer == null && players != null) thisPlayer = PhotonManager.instance.Helper;
+                helper.transform.Find("Camera Offset").gameObject.SetActive(true);
+                CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(helper.transform);
+            }
+        }
+
+        
+
         Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 
