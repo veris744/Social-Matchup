@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
         
 
-        Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
+        //Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 
     public void SetPVP(bool pvp)
@@ -120,4 +120,5 @@ public class GameManager : MonoBehaviour
         if (playerId >= 3 && playerId <= 4) return 2;
         return 0;
     }*/
+
 }
