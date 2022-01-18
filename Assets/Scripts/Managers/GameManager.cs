@@ -49,22 +49,25 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
-        if (thisPlayer == null && players != null) 
-
-        helper = GameObject.FindGameObjectWithTag("Helper");
-        helper.transform.Find("Camera Offset").gameObject.SetActive(false);
-        if (helper.GetPhotonView().IsMine)
+        
+        if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
-            thisPlayer = PhotonManager.instance.Helper;
-            Debug.Log("Player Mine: " + helper.GetInstanceID());
-            thisPlayer = helper.gameObject;
+            helper = GameObject.FindGameObjectsWithTag("Helper")[0];
+            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
+            if (helper.GetPhotonView().IsMine)
+            {
+                thisPlayer = PhotonManager.instance.Helper;
+                Debug.Log("Player Mine: " + helper.GetInstanceID());
+                thisPlayer = helper.gameObject;
 
-            helper.transform.Find("Camera Offset").gameObject.SetActive(true);
-            CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
-            cameraController.enabled = true;
-            cameraController.SetTarget(helper.transform);
+                helper.transform.Find("Camera Offset").gameObject.SetActive(true);
+                CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(helper.transform);
+            }
         }
+
+        
 
         Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }

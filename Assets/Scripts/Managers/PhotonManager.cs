@@ -230,7 +230,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(5f);
 
-        helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion(0, 0.707f, 0, 0.707f), 0);
+        helper = PhotonNetwork.Instantiate("Helper", new Vector3(8.5f, 3, 0), new Quaternion.identity, 0);
 
 
         //enabling audio listener 
