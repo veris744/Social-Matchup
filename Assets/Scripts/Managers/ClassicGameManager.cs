@@ -11,6 +11,23 @@ public class ClassicGameManager : MonoBehaviour
     public bool emoji2B;
     public bool emoji3B;
 
+    public GameObject angry1;
+    public GameObject angry2;
+    public GameObject crying1;
+    public GameObject crying2;
+    public GameObject embarassed1;
+    public GameObject embarassed2;
+    public GameObject involve1;
+    public GameObject involve2;
+    public GameObject laughing1;
+    public GameObject laughing2;
+    public GameObject scared1;
+    public GameObject scared2;
+    public GameObject smiling1;
+    public GameObject smiling2;
+    public GameObject surprised1;
+    public GameObject surprised2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +38,9 @@ public class ClassicGameManager : MonoBehaviour
         emoji1B = false;
         emoji2B = false;
         emoji3B = false;
+
+
+        SpawnEmojis();
     }
 
     // Update is called once per frame
@@ -68,21 +88,42 @@ public class ClassicGameManager : MonoBehaviour
         }
     }
 
-    public void spawnEmojis()
+    public void SpawnEmojis()
     {
-        Instantiate(Resources.Load("Models/angry"), new Vector3(0, 0, 0), Quaternion.identity);
-        GameObject.Find("angry").name = "angry1";
+        //GameObject.Find("Player1GameObjects/crying1").SetActive(true);
+        crying1.SetActive(true);
+        crying2.SetActive(true);
+        angry1.SetActive(true);
+        angry2.SetActive(true);
+        laughing1.SetActive(true);
+        laughing2.SetActive(true);
+        /*
+        Instantiate(Resources.Load("Models/angry"), new Vector3(0.15f, -0.239999f, -1.91f), Quaternion.identity);
+        GameObject.Find("angry(Clone)").name = "angry1";
 
-        Instantiate(Resources.Load("Models/angry"), new Vector3(0, 0, 0), Quaternion.identity);
-        GameObject.Find("angry").name = "angry2";
+        Instantiate(Resources.Load("Models/angry"), new Vector3(-0.2f, 7.9f, 1.5f), Quaternion.identity);
+        GameObject.Find("angry(Clone)").name = "angry2";
 
+        Instantiate(Resources.Load("Models/smiling"), new Vector3(7.23f, 3.2f, 1.5f), Quaternion.identity);
+        GameObject.Find("smiling(Clone)").name = "smiling1";
+
+        Instantiate(Resources.Load("Models/smiling"), new Vector3(7.23f, 3.2f, 1.5f), Quaternion.identity);
+        GameObject.Find("smiling(Clone)").name = "smiling2";
+
+        Instantiate(Resources.Load("Models/laughing"), new Vector3(4.9f, 6.44f, 1.5f), Quaternion.identity);
+        GameObject.Find("laughing(Clone)").name = "laughing1";
+
+        Instantiate(Resources.Load("Models/laughing"), new Vector3(4.9f, 6.44f, 1.5f), Quaternion.identity);
+        GameObject.Find("laughing(Clone)").name = "laughing2";
+        /*
         if (PhotonManager.instance.NumberOfImages == 4)
         {
 
         } else if (PhotonManager.instance.NumberOfImages == 5)
         {
 
-        }
+        }*/
+
     }
 
      void victory()

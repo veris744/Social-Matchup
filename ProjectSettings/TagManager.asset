@@ -6,6 +6,7 @@ TagManager:
   tags:
   - JoinRoomButton
   - Helper
+  - Emoji
   layers:
   - Default
   - TransparentFX
