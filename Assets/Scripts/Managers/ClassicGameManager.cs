@@ -90,7 +90,6 @@ public class ClassicGameManager : MonoBehaviour
 
     public void SpawnEmojis()
     {
-        //GameObject.Find("Player1GameObjects/crying1").SetActive(true);
         crying1.SetActive(true);
         crying2.SetActive(true);
         angry1.SetActive(true);
@@ -103,18 +102,6 @@ public class ClassicGameManager : MonoBehaviour
 
         Instantiate(Resources.Load("Models/angry"), new Vector3(-0.2f, 7.9f, 1.5f), Quaternion.identity);
         GameObject.Find("angry(Clone)").name = "angry2";
-
-        Instantiate(Resources.Load("Models/smiling"), new Vector3(7.23f, 3.2f, 1.5f), Quaternion.identity);
-        GameObject.Find("smiling(Clone)").name = "smiling1";
-
-        Instantiate(Resources.Load("Models/smiling"), new Vector3(7.23f, 3.2f, 1.5f), Quaternion.identity);
-        GameObject.Find("smiling(Clone)").name = "smiling2";
-
-        Instantiate(Resources.Load("Models/laughing"), new Vector3(4.9f, 6.44f, 1.5f), Quaternion.identity);
-        GameObject.Find("laughing(Clone)").name = "laughing1";
-
-        Instantiate(Resources.Load("Models/laughing"), new Vector3(4.9f, 6.44f, 1.5f), Quaternion.identity);
-        GameObject.Find("laughing(Clone)").name = "laughing2";
         /*
         if (PhotonManager.instance.NumberOfImages == 4)
         {
