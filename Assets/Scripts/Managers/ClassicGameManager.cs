@@ -20,6 +20,8 @@ public class ClassicGameManager : GameManager
     public Emoji selected1 = Emoji.none1;
     public Emoji selected2 = Emoji.none2;
 
+    Vector3 baseEmojiPosition1 = new Vector3(3, 2, 1.1f);
+    Vector3 baseEmojiPosition2 = new Vector3(3, 2, -1.1f);
 
     public GameObject angry1;
     public GameObject angry2;
@@ -179,18 +181,18 @@ public class ClassicGameManager : GameManager
 
     public void SpawnEmojis()
     {
-        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
-        crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
-        embarassed1 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        embarassed2 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
-        laughing1 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        laughing2 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
-        scared1 = PhotonNetwork.Instantiate("Models/Prefab/Scared", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        scared2 = PhotonNetwork.Instantiate("Models/Prefab/Scared", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
-        smiling1 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        smiling2 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
+        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
+        crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
+        crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
+        embarassed1 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", baseEmojiPosition1, Quaternion.identity, 0);
+        embarassed2 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", baseEmojiPosition1, Quaternion.identity, 0);
+        laughing1 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", baseEmojiPosition1, Quaternion.identity, 0);
+        laughing2 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", baseEmojiPosition1, Quaternion.identity, 0);
+        scared1 = PhotonNetwork.Instantiate("Models/Prefab/Scared", baseEmojiPosition1, Quaternion.identity, 0);
+        scared2 = PhotonNetwork.Instantiate("Models/Prefab/Scared", baseEmojiPosition1, Quaternion.identity, 0);
+        smiling1 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", baseEmojiPosition1, Quaternion.identity, 0);
+        smiling2 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", baseEmojiPosition1, Quaternion.identity, 0);
 
     }
 
