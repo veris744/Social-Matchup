@@ -34,6 +34,8 @@ public class ClassicGameManager : GameManager
     public GameObject smiling1;
     public GameObject smiling2;
 
+    int init = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,16 +45,17 @@ public class ClassicGameManager : GameManager
     // Update is called once per frame
     void Update()
     {
-        int i = 0;
-        if(i==0 && players.Length == 2)
+        
+        if(init==0)
         {
-            i++;
-            if (this.gameObject.GetPhotonView().IsMine) //only the main GameManager must Spawn the Images
+            init++;
+            if (PhotonNetwork.IsMasterClient)
             {
+                Debug.Log("master");
                 SpawnEmojis();
             }
         }
-
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -190,9 +193,13 @@ public class ClassicGameManager : GameManager
         smiling1.SetActive(true);
         smiling2.SetActive(true);
         */
+        /*
         Instantiate(Resources.Load("Models/Angry"), new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)));
         GameObject.Find("Angry(Clone)").name = "angry1";
+        */
 
+        angry1 = PhotonNetwork.Instantiate("Models/Angry", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        //GameObject.Find("Angry(Clone)").name = "angry1";
         Instantiate(Resources.Load("Models/Angry"), new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)));
         GameObject.Find("Angry(Clone)").name = "angry2";
         /*

@@ -49,7 +49,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         photonVoiceManager = GameObject.Find("PhotonVoiceManager");
         Connect();
-
     }
 
     public override void OnEnable()

@@ -14,6 +14,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
+
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
         Debug.Log("GameManger name: " + gameObject.name);
         this.pvp = PhotonManager.instance.pvp;
 
@@ -63,14 +71,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {   
-
-        
-        
 
         //Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
@@ -123,5 +123,6 @@ public class GameManager : MonoBehaviour
         if (playerId >= 3 && playerId <= 4) return 2;
         return 0;
     }*/
+
 
 }
