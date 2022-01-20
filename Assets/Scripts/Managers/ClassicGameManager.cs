@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClassicGameManager : MonoBehaviour
+public class ClassicGameManager : GameManager
 {
     public enum Emoji
     {
@@ -33,15 +34,36 @@ public class ClassicGameManager : MonoBehaviour
     public GameObject smiling1;
     public GameObject smiling2;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEmojis();
     }
 
     // Update is called once per frame
     void Update()
     {
+        int i = 0;
+        if(i==0 && players.Length == 2)
+        {
+            i++;
+            if (this.gameObject.GetPhotonView().IsMine) //only the main GameManager must Spawn the Images
+            {
+                SpawnEmojis();
+            }
+        }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                Debug.Log(hit.transform.gameObject.name);
+            }
+        }
         if (selected1 == selected2)
         {
             Destroy(GameObject.Find(selected1.ToString() + "1").gameObject);
@@ -154,8 +176,9 @@ public class ClassicGameManager : MonoBehaviour
 
     public void SpawnEmojis()
     {
-        angry1.SetActive(true);
-        angry2.SetActive(true);
+        /*
+        //angry1.SetActive(true);
+        //angry2.SetActive(true);
         crying1.SetActive(true);
         crying2.SetActive(true);
         embarassed1.SetActive(true);
@@ -166,24 +189,24 @@ public class ClassicGameManager : MonoBehaviour
         scared1.SetActive(true);
         smiling1.SetActive(true);
         smiling2.SetActive(true);
-    /*
-    Instantiate(Resources.Load("Models/angry"), new Vector3(0.15f, -0.239999f, -1.91f), Quaternion.identity);
-    GameObject.Find("angry(Clone)").name = "angry1";
+        */
+        Instantiate(Resources.Load("Models/Angry"), new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)));
+        GameObject.Find("Angry(Clone)").name = "angry1";
 
-    Instantiate(Resources.Load("Models/angry"), new Vector3(-0.2f, 7.9f, 1.5f), Quaternion.identity);
-    GameObject.Find("angry(Clone)").name = "angry2";
-    /*
-    if (PhotonManager.instance.NumberOfImages == 4)
-    {
+        Instantiate(Resources.Load("Models/Angry"), new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)));
+        GameObject.Find("Angry(Clone)").name = "angry2";
+        /*
+        if (PhotonManager.instance.NumberOfImages == 4)
+        {
 
-    } else if (PhotonManager.instance.NumberOfImages == 5)
-    {
+        } else if (PhotonManager.instance.NumberOfImages == 5)
+        {
 
-    }*/
+        }*/
 
-}
+    }
 
-     void victory()
+    void victory()
     {
 
     }
