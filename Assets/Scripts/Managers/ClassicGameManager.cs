@@ -179,37 +179,18 @@ public class ClassicGameManager : GameManager
 
     public void SpawnEmojis()
     {
-        /*
-        //angry1.SetActive(true);
-        //angry2.SetActive(true);
-        crying1.SetActive(true);
-        crying2.SetActive(true);
-        embarassed1.SetActive(true);
-        embarassed2.SetActive(true);
-        laughing1.SetActive(true);
-        laughing2.SetActive(true);
-        laughing1.SetActive(true);
-        scared1.SetActive(true);
-        smiling1.SetActive(true);
-        smiling2.SetActive(true);
-        */
-        /*
-        Instantiate(Resources.Load("Models/Angry"), new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)));
-        GameObject.Find("Angry(Clone)").name = "angry1";
-        */
-
-        angry1 = PhotonNetwork.Instantiate("Models/Angry", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
-        //GameObject.Find("Angry(Clone)").name = "angry1";
-        Instantiate(Resources.Load("Models/Angry"), new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)));
-        GameObject.Find("Angry(Clone)").name = "angry2";
-        /*
-        if (PhotonManager.instance.NumberOfImages == 4)
-        {
-
-        } else if (PhotonManager.instance.NumberOfImages == 5)
-        {
-
-        }*/
+        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        embarassed1 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        embarassed2 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        laughing1 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        laughing2 = PhotonNetwork.Instantiate("Models/Prefab/Laughing", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        scared1 = PhotonNetwork.Instantiate("Models/Prefab/Scared", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        scared2 = PhotonNetwork.Instantiate("Models/Prefab/Scared", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
+        smiling1 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", new Vector3(2.7712f, 3.9141f, 1.5f), Quaternion.Euler(new Vector3(270, 0, 0)), 0);
+        smiling2 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", new Vector3(-34.2f, 2.794099f, -1.5f), Quaternion.Euler(new Vector3(270, 0, 180)), 0);
 
     }
 
