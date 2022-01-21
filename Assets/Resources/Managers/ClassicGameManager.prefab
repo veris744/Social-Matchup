@@ -48,6 +48,16 @@ MonoBehaviour:
   selected2: 1
   angry1: {fileID: 0}
   angry2: {fileID: 0}
+  crying1: {fileID: 0}
+  crying2: {fileID: 0}
+  embarassed1: {fileID: 0}
+  embarassed2: {fileID: 0}
+  laughing1: {fileID: 0}
+  laughing2: {fileID: 0}
+  scared1: {fileID: 0}
+  scared2: {fileID: 0}
+  smiling1: {fileID: 0}
+  smiling2: {fileID: 0}
 --- !u!114 &6310915715616687549
 MonoBehaviour:
   m_ObjectHideFlags: 0
