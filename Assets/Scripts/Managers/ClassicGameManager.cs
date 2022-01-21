@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ClassicGameManager : GameManager
 {
@@ -25,18 +26,21 @@ public class ClassicGameManager : GameManager
 
     public GameObject angry1;
     public GameObject angry2;
+    private GameObject angryButton1;
+    private GameObject angryButton2;
+
     /*
-    public GameObject crying1;
-    public GameObject crying2;
-    public GameObject embarassed1;
-    public GameObject embarassed2;
-    public GameObject laughing1;
-    public GameObject laughing2;
-    public GameObject scared1;
-    public GameObject scared2;
-    public GameObject smiling1;
-    public GameObject smiling2;
-    */
+public GameObject crying1;
+public GameObject crying2;
+public GameObject embarassed1;
+public GameObject embarassed2;
+public GameObject laughing1;
+public GameObject laughing2;
+public GameObject scared1;
+public GameObject scared2;
+public GameObject smiling1;
+public GameObject smiling2;
+*/
     int init = 0;
 
 
@@ -62,6 +66,7 @@ public class ClassicGameManager : GameManager
 
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("getMouseDown");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -187,8 +192,22 @@ public class ClassicGameManager : GameManager
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
 
-        PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition1, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition2, Quaternion.identity, 0);
+        angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition1, Quaternion.identity, 0);
+        angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition2, Quaternion.identity, 0);
+
+        angryButton1.AddComponent(typeof(EventTrigger));
+        EventTrigger trigger = angryButton1.GetComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((eventData) => { Debug.Log("event trigger angry1"); });
+        trigger.triggers.Add(entry);
+
+        angryButton2.AddComponent(typeof(EventTrigger));
+        EventTrigger trigger2 = angryButton1.GetComponent<EventTrigger>();
+        EventTrigger.Entry entry2 = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((eventData) => { Debug.Log("event trigger angry1"); });
+        trigger.triggers.Add(entry);
         /*
         crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
         crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
