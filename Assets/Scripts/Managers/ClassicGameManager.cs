@@ -2,7 +2,6 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class ClassicGameManager : GameManager
 {
@@ -21,8 +20,8 @@ public class ClassicGameManager : GameManager
     public Emoji selected1 = Emoji.none1;
     public Emoji selected2 = Emoji.none2;
 
-    Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
-    Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
+    Vector3 baseEmojiPosition1 = new Vector3(3, 2, 1.1f);
+    Vector3 baseEmojiPosition2 = new Vector3(3, 2, -1.1f);
 
     public GameObject angry1;
     public GameObject angry2;
@@ -184,7 +183,6 @@ public class ClassicGameManager : GameManager
     {
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
-        /*
         crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
         crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
         embarassed1 = PhotonNetwork.Instantiate("Models/Prefab/Embarassed", baseEmojiPosition1, Quaternion.identity, 0);
@@ -195,11 +193,8 @@ public class ClassicGameManager : GameManager
         scared2 = PhotonNetwork.Instantiate("Models/Prefab/Scared", baseEmojiPosition1, Quaternion.identity, 0);
         smiling1 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", baseEmojiPosition1, Quaternion.identity, 0);
         smiling2 = PhotonNetwork.Instantiate("Models/Prefab/Smiling", baseEmojiPosition1, Quaternion.identity, 0);
-        */
 
     }
-
-
 
     void victory()
     {
