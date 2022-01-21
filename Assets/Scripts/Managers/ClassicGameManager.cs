@@ -187,8 +187,8 @@ public class ClassicGameManager : GameManager
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
 
-        PhotonNetwork.Instantiate("Models.Prefab/EmojiButton", baseEmojiPosition1, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models.Prefab/EmojiButton", baseEmojiPosition2, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition2, Quaternion.identity, 0);
         /*
         crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
         crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
