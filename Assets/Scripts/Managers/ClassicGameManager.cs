@@ -25,6 +25,7 @@ public class ClassicGameManager : GameManager
 
     public GameObject angry1;
     public GameObject angry2;
+    /*
     public GameObject crying1;
     public GameObject crying2;
     public GameObject embarassed1;
@@ -35,7 +36,7 @@ public class ClassicGameManager : GameManager
     public GameObject scared2;
     public GameObject smiling1;
     public GameObject smiling2;
-
+    */
     int init = 0;
 
 
@@ -84,14 +85,16 @@ public class ClassicGameManager : GameManager
 
     public void ClickOnAngry1()
     {
+        Debug.Log("ClickOnAngry1");
         OnClick1("angry1", EmojiEnum.angry);
     }
 
     public void ClickOnAngry2()
     {
+        Debug.Log("ClickOnAngry2");
         OnClick2("angry2", EmojiEnum.angry);
     }
-
+    /*
     public void ClickOnCrying1()
     {
         OnClick1("crying1", EmojiEnum.crying);
@@ -139,7 +142,7 @@ public class ClassicGameManager : GameManager
     {
         OnClick2("smiling2", EmojiEnum.smiling);
     }
-
+    */
     void OnClick1(string gameObjectName, EmojiEnum emojiName)
     {
         if (selected1.CompareTo(emojiName) == 0)
@@ -183,6 +186,9 @@ public class ClassicGameManager : GameManager
     {
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
+
+        PhotonNetwork.Instantiate("Models.Prefab/EmojiButton", baseEmojiPosition1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models.Prefab/EmojiButton", baseEmojiPosition2, Quaternion.identity, 0);
         /*
         crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
         crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying", baseEmojiPosition1, Quaternion.identity, 0);
