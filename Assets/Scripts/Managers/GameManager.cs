@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
-    protected GameObject helper;
+    //protected GameObject helper;
     protected bool pvp;
 
     // Start is called before the first frame update
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
+        /*
         if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
             helper = GameObject.FindGameObjectsWithTag("Helper")[0];
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
                 cameraController.SetTarget(helper.transform);
             }
         }
-
+        */
 
 
         //Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);

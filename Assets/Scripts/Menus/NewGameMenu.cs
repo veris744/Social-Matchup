@@ -8,7 +8,7 @@ public class NewGameMenu : MonoBehaviour
 {
     private string playerName, task, numberOfImages;
     private byte numberOfPlayers;
-    private bool audioChat, hasHelper;
+    private bool audioChat; //, hasHelper;
 
     
     // Start is called before the first frame update
@@ -29,14 +29,14 @@ public class NewGameMenu : MonoBehaviour
 
         audioChat = GameObject.Find("AudioChatToggle").GetComponent<Toggle>().isOn;
 
-        hasHelper = GameObject.Find("HelperToggle").GetComponent<Toggle>().isOn;
+        //hasHelper = GameObject.Find("HelperToggle").GetComponent<Toggle>().isOn;
 
 
         task = "Classic";
-
+        /*
         if (hasHelper)
             numberOfPlayers = 3;
-        else
+        else */
             numberOfPlayers = 2;
 
         PhotonManager.instance.Location = "Castle";

@@ -23,9 +23,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public bool AudioChat;
     public bool pvp;
 
-    private GameObject helper;
+    //private GameObject helper;
 
-    public GameObject Helper => helper;
+    //public GameObject Helper => helper;
 
     private int order;
     private GameObject gameManager;
@@ -66,7 +66,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to the server");
-        helper = null;
+        //helper = null;
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
@@ -185,7 +185,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                     StartCoroutine(StartGameAsPlayer(0));
                     break;
                 case 3:
-                    StartCoroutine(StartGameAsHelper());
+                    //StartCoroutine(StartGameAsHelper());
                     break;
             }
 
@@ -224,7 +224,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
 
     }
-
+    /*
     IEnumerator StartGameAsHelper()
     {
         yield return new WaitForSeconds(5f);
@@ -240,7 +240,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
 
-    }
+    }*/
 
     IEnumerator StartGameAndInstantiateGameManager(bool pvp) //crea un GameManager al primo giocatore e una sua View in tutti i mondi
     {

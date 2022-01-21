@@ -128,10 +128,12 @@ public class ClassicGameManager : GameManager
     public void SpawnEmojis()
     {
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
+        GameObject.Find("Angry(Clone)").name = "angry1";
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
+        GameObject.Find("Angry(Clone)").name = "angry1";
 
-        angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition1, Quaternion.identity, 0);
-        angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", baseEmojiPosition2, Quaternion.identity, 0);
+        angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
+        angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
 
         angryButton1.AddComponent(typeof(EventTrigger));
         EventTrigger trigger = angryButton1.GetComponent<EventTrigger>();
