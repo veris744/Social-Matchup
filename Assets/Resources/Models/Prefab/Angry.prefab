@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8216358727859803312}
   - component: {fileID: -9049449271020923610}
   - component: {fileID: 8924149786847311200}
+  - component: {fileID: 3559011218186201521}
   m_Layer: 0
   m_Name: Angry
   m_TagString: Untagged
@@ -68,6 +69,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3559011218186201521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489611899765137389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5393a2554ce2464e998a01261348398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3679108921026890146
 PrefabInstance:
   m_ObjectHideFlags: 0
