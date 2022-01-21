@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
                         CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
+                        player.transform.Find("Avatar").gameObject.SetActive(false);
                     }
                 }
 
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
                 CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(helper.transform);
+                helper.transform.Find("Avatar").gameObject.SetActive(false);
             }
         }
 
