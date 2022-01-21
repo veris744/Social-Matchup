@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ClassicGameManager : GameManager
 {
-    public enum Emoji
+    public enum EmojiEnum
     {
         none1,
         none2,
@@ -17,8 +17,8 @@ public class ClassicGameManager : GameManager
         smiling
     }
 
-    public Emoji selected1 = Emoji.none1;
-    public Emoji selected2 = Emoji.none2;
+    public EmojiEnum selected1 = EmojiEnum.none1;
+    public EmojiEnum selected2 = EmojiEnum.none2;
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
@@ -84,73 +84,73 @@ public class ClassicGameManager : GameManager
 
     public void ClickOnAngry1()
     {
-        OnClick1("angry1", Emoji.angry);
+        OnClick1("angry1", EmojiEnum.angry);
     }
 
     public void ClickOnAngry2()
     {
-        OnClick2("angry2", Emoji.angry);
+        OnClick2("angry2", EmojiEnum.angry);
     }
 
     public void ClickOnCrying1()
     {
-        OnClick1("crying1", Emoji.crying);
+        OnClick1("crying1", EmojiEnum.crying);
     }
 
     public void ClickOnCrying2()
     {
         
-        OnClick2("crying2", Emoji.crying);
+        OnClick2("crying2", EmojiEnum.crying);
     }
     public void ClickOnEmbarassed1()
     {
-        OnClick1("embarassed1", Emoji.embarassed);
+        OnClick1("embarassed1", EmojiEnum.embarassed);
     }
 
     public void ClickOnEmbarassed2()
     {
-        OnClick2("embarassed2", Emoji.embarassed);
+        OnClick2("embarassed2", EmojiEnum.embarassed);
     }
     public void ClickOnLaughing1()
     {
-        OnClick1("laughing1", Emoji.laughing);
+        OnClick1("laughing1", EmojiEnum.laughing);
     }
 
     public void ClickOnLaughing2()
     {
-        OnClick2("laughing2", Emoji.laughing);
+        OnClick2("laughing2", EmojiEnum.laughing);
     }
 
     public void ClickOnScared1()
     {
-        OnClick1("scared1", Emoji.scared);
+        OnClick1("scared1", EmojiEnum.scared);
     }
 
     public void ClickOnScared2()
     {
-        OnClick2("scared2", Emoji.scared);
+        OnClick2("scared2", EmojiEnum.scared);
     }
     public void ClickOnSmiling1()
     {
-        OnClick1("smiling2", Emoji.smiling);
+        OnClick1("smiling2", EmojiEnum.smiling);
     }
 
     public void ClickOnSmiling2()
     {
-        OnClick2("smiling2", Emoji.smiling);
+        OnClick2("smiling2", EmojiEnum.smiling);
     }
 
-    void OnClick1(string gameObjectName, Emoji emojiName)
+    void OnClick1(string gameObjectName, EmojiEnum emojiName)
     {
         if (selected1.CompareTo(emojiName) == 0)
         {
-            selected1 = Emoji.none1;
+            selected1 = EmojiEnum.none1;
             GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
 
         }
         else
         {
-            if (selected1.CompareTo(Emoji.none1) != 0)
+            if (selected1.CompareTo(EmojiEnum.none1) != 0)
             {
                 GameObject.Find(selected1.ToString() + "1").transform.localScale = new Vector3(50f, 50f, 50f);
             }
@@ -159,16 +159,16 @@ public class ClassicGameManager : GameManager
         }
     }
 
-    void OnClick2(string gameObjectName, Emoji emojiName)
+    void OnClick2(string gameObjectName, EmojiEnum emojiName)
     {
         if (selected2.CompareTo(emojiName)==0)
         {
             GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
-            selected2 = Emoji.none2;
+            selected2 = EmojiEnum.none2;
         }
         else
         {
-            if(selected2.CompareTo(Emoji.none2) != 0)
+            if(selected2.CompareTo(EmojiEnum.none2) != 0)
             {
                 GameObject.Find(selected2.ToString() + "2").transform.localScale = new Vector3(50f, 50f, 50f);
             }
