@@ -16,76 +16,7 @@ public class ClassicGameManager : GameManager
         public int number; //1
     };
 
-    EmojiStruct StringToEmojiStruct(string s)
-    {
-        EmojiStruct structEmoji;
-        structEmoji.gameObjectName = s;
-        structEmoji.emojiName = "none";
-        structEmoji.number = 0;
-        switch (s)
-        {
-            case "Angry1(Clone)":
-                structEmoji.emojiName = "Angry1";
-                structEmoji.number = 1;
-                break;
-            case "Angry2(Clone)":
-                structEmoji.emojiName = "Angry2";
-                structEmoji.number = 2;
-                break;
-            case "Crying1(Clone)":
-                structEmoji.emojiName = "Crying1";
-                structEmoji.number = 1;
-                break;
-            case "Crying2(Clone)":
-                structEmoji.emojiName = "Crying2";
-                structEmoji.number = 2;
-                break;
-            case "Embarassed1(Clone)":
-                structEmoji.emojiName = "Embarassed1";
-                structEmoji.number = 1;
-                break;
-            case "Embarassed2(Clone)":
-                structEmoji.emojiName = "Embarassed2";
-                structEmoji.number = 2;
-                break;
-            case "Laughing1(Clone)":
-                structEmoji.emojiName = "Laughing1";
-                structEmoji.number = 1;
-                break;
-            case "Laughing2(Clone)":
-                structEmoji.emojiName = "Laughing2";
-                structEmoji.number = 2;
-                break;
-            case "Scared1(Clone)":
-                structEmoji.emojiName = "Scared1";
-                structEmoji.number = 1;
-                break;
-            case "Scared2(Clone)":
-                structEmoji.emojiName = "Scared2";
-                structEmoji.number = 2;
-                break;
-            case "Smiling1(Clone)":
-                structEmoji.emojiName = "Smiling1";
-                structEmoji.number = 1;
-                break;
-            case "Smiling2(Clone)":
-                structEmoji.emojiName = "Smiling2";
-                structEmoji.number = 2;
-                break;
-            case "Surprised1(Clone)":
-                structEmoji.emojiName = "Surprised1";
-                structEmoji.number = 1;
-                break;
-            case "Surprised2(Clone)":
-                structEmoji.emojiName = "Surprised2";
-                structEmoji.number = 2;
-                break;
-            default:
-                break;
-
-        }
-        return structEmoji;
-    }
+    
 
     public EmojiStruct selected1;
     public EmojiStruct selected2;
@@ -93,6 +24,7 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
 
+    Vector3[] positionsArray;
 
     int init = 0;
 
@@ -114,6 +46,8 @@ public class ClassicGameManager : GameManager
     {
         ResetSelected1();
         ResetSelected2();
+        positionsArray = new [] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f), 
+            new Vector3(0.6f, 2f, 0f), new Vector3(-0.6f, 2f, 0f), new Vector3(1.8f, 2f, 0f), new Vector3(-1.8f, 2f, 0f) };
     }
 
     // Update is called once per frame
@@ -184,8 +118,8 @@ public class ClassicGameManager : GameManager
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Scared1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Scared2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Involve1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Involve2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
@@ -243,5 +177,77 @@ public class ClassicGameManager : GameManager
     void victory()
     {
 
+    }
+
+
+    EmojiStruct StringToEmojiStruct(string s)
+    {
+        EmojiStruct structEmoji;
+        structEmoji.gameObjectName = s;
+        structEmoji.emojiName = "none";
+        structEmoji.number = 0;
+        switch (s)
+        {
+            case "Angry1(Clone)":
+                structEmoji.emojiName = "Angry1";
+                structEmoji.number = 1;
+                break;
+            case "Angry2(Clone)":
+                structEmoji.emojiName = "Angry2";
+                structEmoji.number = 2;
+                break;
+            case "Crying1(Clone)":
+                structEmoji.emojiName = "Crying1";
+                structEmoji.number = 1;
+                break;
+            case "Crying2(Clone)":
+                structEmoji.emojiName = "Crying2";
+                structEmoji.number = 2;
+                break;
+            case "Embarassed1(Clone)":
+                structEmoji.emojiName = "Embarassed1";
+                structEmoji.number = 1;
+                break;
+            case "Embarassed2(Clone)":
+                structEmoji.emojiName = "Embarassed2";
+                structEmoji.number = 2;
+                break;
+            case "Laughing1(Clone)":
+                structEmoji.emojiName = "Laughing1";
+                structEmoji.number = 1;
+                break;
+            case "Laughing2(Clone)":
+                structEmoji.emojiName = "Laughing2";
+                structEmoji.number = 2;
+                break;
+            case "Involve1(Clone)":
+                structEmoji.emojiName = "Involve1";
+                structEmoji.number = 1;
+                break;
+            case "Involve2(Clone)":
+                structEmoji.emojiName = "Involve2";
+                structEmoji.number = 2;
+                break;
+            case "Smiling1(Clone)":
+                structEmoji.emojiName = "Smiling1";
+                structEmoji.number = 1;
+                break;
+            case "Smiling2(Clone)":
+                structEmoji.emojiName = "Smiling2";
+                structEmoji.number = 2;
+                break;
+            case "Surprised1(Clone)":
+                structEmoji.emojiName = "Surprised1";
+                structEmoji.number = 1;
+                break;
+            case "Surprised2(Clone)":
+                structEmoji.emojiName = "Surprised2";
+                structEmoji.number = 2;
+                break;
+            default:
+                break;
+
+        }
+        return structEmoji;
     }
 }
