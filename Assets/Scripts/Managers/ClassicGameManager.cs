@@ -80,6 +80,7 @@ public class ClassicGameManager : GameManager
             {
                 Debug.Log("Object clicked: " + hit.transform.gameObject.name);
                 EmojiStruct emjStruct = StringToEmojiStruct(hit.transform.gameObject.name);
+                Debug.Log(emjStruct.gameObjectName + emjStruct.emojiName + emjStruct.number);
                 OnClick(emjStruct);
                 /*
                 if (thisPlayer.GetInstanceID() == 1001)
@@ -122,21 +123,50 @@ public class ClassicGameManager : GameManager
 
     void OnClick(EmojiStruct structEmoji)
     {
-        if (selected1.CompareTo(structEmoji.emojiName) == 0)
+        if(structEmoji.number == 1)
         {
-            selected1 = null;
-            GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
-
-        }
-        else
-        {
-            if (selected1.CompareTo(structEmoji.emojiName) != 0)
+            if (selected1.CompareTo(structEmoji.emojiName) == 0)
             {
-                GameObject.Find(selected1.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                selected1 = null;
+                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+
             }
-            selected1 = structEmoji.emojiName;
-            GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+            else
+            {
+                if (selected1.CompareTo(structEmoji.emojiName) != 0)
+                {
+                    GameObject.Find(selected1.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                }
+                selected1 = structEmoji.emojiName;
+                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+            }
+        } else
+        {
+            if (structEmoji.number == 2)
+            {
+                if (selected2.CompareTo(structEmoji.emojiName) == 0)
+                {
+                    selected2 = null;
+                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+
+                }
+                else
+                {
+                    if (selected2.CompareTo(structEmoji.emojiName) != 0)
+                    {
+                        GameObject.Find(selected2.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                    }
+                    selected2 = structEmoji.emojiName;
+                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+                }
+            }
+            else
+            {
+                Debug.Log("warning: emojiStruct might not be instantiated");
+            }
         }
+
+        
     }
 
     void victory()
