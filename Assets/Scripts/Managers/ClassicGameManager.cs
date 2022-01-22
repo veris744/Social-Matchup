@@ -93,21 +93,6 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
 
-    public GameObject angry1;
-    public GameObject angry2;
-    public GameObject crying1;
-    public GameObject crying2;
-    public GameObject Embarassed1;
-    public GameObject Embarassed2;
-    public GameObject Laughing1;
-    public GameObject Laughing2;
-    public GameObject Scared1;
-    public GameObject Scared2;
-    public GameObject Smiling1;
-    public GameObject Smiling2;
-    public GameObject Surprised1;
-    public GameObject Surprised2;
-
 
     int init = 0;
 
@@ -191,10 +176,10 @@ public class ClassicGameManager : GameManager
     public void SpawnEmojis()
     {
         Vector3 pos1 = new Vector3(1f, 0f, 0f);
-        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1, Quaternion.identity, 0);
-        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2, Quaternion.identity, 0);
-        crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
-        crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
