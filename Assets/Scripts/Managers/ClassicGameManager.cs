@@ -132,7 +132,7 @@ public class ClassicGameManager : GameManager
         if(structEmoji.number == 1)
         {
             Debug.Log(selected1.emojiName + " equals? " + structEmoji.emojiName);
-            if (String.Equals(selected1, structEmoji.emojiName))
+            if (String.Equals(selected1.emojiName, structEmoji.emojiName))
             {
                 ResetSelected1();
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
