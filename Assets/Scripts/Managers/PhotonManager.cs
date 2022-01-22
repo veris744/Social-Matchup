@@ -240,6 +240,23 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     }
 
+    IEnumerator StartGameAsHelper()
+    {
+        yield return new WaitForSeconds(5f);
+
+        helper = PhotonNetwork.Instantiate("Helper", new Vector3(9.5f, 2, 0), Quaternion.identity, 0);
+
+
+        //enabling audio listener 
+        helper.GetComponent<AudioListener>().enabled = false;
+
+        //enabling audioChat
+        if (AudioChat) EnableAudioChat(helper);
+        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+
+
+    }
+
     IEnumerator StartGameAndInstantiateGameManager(bool pvp) //crea un GameManager al primo giocatore e una sua View in tutti i mondi
     {
         yield return new WaitForSeconds(5f);
