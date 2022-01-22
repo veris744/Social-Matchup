@@ -77,10 +77,10 @@ public class ClassicGameManager : MonoBehaviour
 
     public void SpawnEmojis()
     {
-        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition1, Quaternion.identity, 0);
-        GameObject.Find("Angry(Clone)").name = "angry1";
-        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.Euler(0, 180, 0), 0);
-        GameObject.Find("Angry(Clone)").name = "angry2";
+        angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1, Quaternion.identity, 0);
+        //GameObject.Find("Angry(Clone)").name = "angry1";
+        angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2, Quaternion.identity, 0);
+        //GameObject.Find("Angry(Clone)").name = "angry2";
 
         //angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
         //angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
