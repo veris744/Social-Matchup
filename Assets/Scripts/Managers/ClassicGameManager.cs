@@ -85,20 +85,6 @@ public class ClassicGameManager : GameManager
         angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
         angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
 
-        angryButton1.AddComponent(typeof(EventTrigger));
-        EventTrigger trigger = angryButton1.GetComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((eventData) => { ClickOnAngry1(); });
-        trigger.triggers.Add(entry);
-
-        angryButton2.AddComponent(typeof(EventTrigger));
-        EventTrigger trigger2 = angryButton1.GetComponent<EventTrigger>();
-        EventTrigger.Entry entry2 = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((eventData) => { ClickOnAngry2(); });
-        trigger.triggers.Add(entry);
-
     }
 
     void victory()

@@ -19,13 +19,8 @@ public class EmojiManager : MonoBehaviour
     public EmojiEnum selected1 = EmojiEnum.none1;
     public EmojiEnum selected2 = EmojiEnum.none2;
 
-    Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
-    Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
-
     public GameObject angry1;
     public GameObject angry2;
-    private GameObject angryButton1;
-    private GameObject angryButton2;
 
     public void ClickOnAngry1()
     {
@@ -36,6 +31,18 @@ public class EmojiManager : MonoBehaviour
     public void ClickOnAngry2()
     {
         Debug.Log("ClickOnAngry2");
+        OnClick2("angry2", EmojiEnum.angry);
+    }
+
+    public void ClickOnCrying1()
+    {
+        Debug.Log("ClickOnCrying1");
+        OnClick1("angry1", EmojiEnum.angry);
+    }
+
+    public void ClickOnCrying2()
+    {
+        Debug.Log("ClickOnCrying2");
         OnClick2("angry2", EmojiEnum.angry);
     }
 
