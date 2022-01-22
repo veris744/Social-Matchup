@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18358491, g: 0.22775927, b: 0.29764205, a: 1}
+  m_IndirectSpecularColor: {r: 0.18358448, g: 0.2277585, b: 0.29764098, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -719,7 +719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1072918387
 Transform:
   m_ObjectHideFlags: 0
@@ -869,6 +869,14 @@ PrefabInstance:
     - target: {fileID: 8249709809390220356, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_Name
       value: Canvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249709809390220356, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249709809390220377, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8249709809390220383, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_Pivot.x
@@ -1257,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2606822097700211006, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8250493230646674187, guid: 7f2efe3e90cc4304a999013e263e47b5, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -1613,7 +1625,11 @@ PrefabInstance:
     - target: {fileID: 7809439994773915851, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1164133789}
+      objectReference: {fileID: 11500000, guid: eed77e21ab9d43042a8ebf8bfff3d954, type: 3}
+    - target: {fileID: 7809439994773915851, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8249709809300211146, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1621,6 +1637,14 @@ PrefabInstance:
     - target: {fileID: 8249709809390220356, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249709809390220356, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249709809390220377, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8249709809390220383, guid: 392e08b50a3465a4d91a2c64e753f205, type: 3}
       propertyPath: m_Pivot.x

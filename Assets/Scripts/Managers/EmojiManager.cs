@@ -22,6 +22,15 @@ public class EmojiManager : MonoBehaviour
     public GameObject angry1;
     public GameObject angry2;
 
+    void Start()
+    {
+    }
+
+    void Update()
+    {
+        
+    }
+
     public void ClickOnAngry1()
     {
         Debug.Log("ClickOnAngry1");
