@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClassicGameManager : GameManager
+public class ClassicGameManager : MonoBehaviour
 {
     public enum EmojiEnum
     {

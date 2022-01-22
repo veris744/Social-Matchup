@@ -8,22 +8,19 @@ public class GameManager : MonoBehaviour
 {
     protected GameObject[] players;
     protected GameObject thisPlayer;
-    //protected GameObject helper;
+    protected GameObject helper;
     protected bool pvp;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-
-
+        Debug.Log("GameManger name: " + gameObject.name);
+        this.pvp = PhotonManager.instance.pvp;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log("GameManger name: " + gameObject.name);
-        this.pvp = PhotonManager.instance.pvp;
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
@@ -47,12 +44,13 @@ public class GameManager : MonoBehaviour
                         CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
+                        player.transform.Find("BaseAvatar").gameObject.SetActive(false);
                     }
                 }
 
             }
         }
-        /*
+
         if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
             helper = GameObject.FindGameObjectsWithTag("Helper")[0];
@@ -67,12 +65,13 @@ public class GameManager : MonoBehaviour
                 CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(helper.transform);
+                helper.transform.Find("Avatar").gameObject.SetActive(false);
             }
         }
-        */
 
 
-        //Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
+
+        Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
 
     public void SetPVP(bool pvp)
@@ -123,6 +122,4 @@ public class GameManager : MonoBehaviour
         if (playerId >= 3 && playerId <= 4) return 2;
         return 0;
     }*/
-
-
 }
