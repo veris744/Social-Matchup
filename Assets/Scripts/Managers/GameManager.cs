@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
                     if (player.GetPhotonView().IsMine)
                     {
-                        Debug.Log("Player Mine: " + player.GetInstanceID());
+                        Debug.Log("Player Mine: " + player.GetPhotonView().ViewID);
                         thisPlayer = player.gameObject;
 
                         player.transform.Find("Camera Offset").gameObject.SetActive(true);

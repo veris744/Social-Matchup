@@ -59,17 +59,20 @@ public class ClassicGameManager : GameManager
             if (Physics.Raycast(ray, out hit, 100))
             {
                 Debug.Log("Object clicked: " + hit.transform.gameObject.name);
+
+                /*
                 if (thisPlayer.GetInstanceID() == 1001)
                 {
                     Debug.Log("player 1001");
                 }
                 else
                 {
-                    if(thisPlayer.GetInstanceID() == 2001)
+                    if(thisPlayer.GetPhotonView().ViewID == 2001)
                     {
                         Debug.Log("player 2001");
                     }
                 }
+                */
             }
         }
         if (selected1 == selected2)
