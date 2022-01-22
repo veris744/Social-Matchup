@@ -40,7 +40,7 @@ public class ClassicGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         if(init==0)
         {
             init++;
@@ -70,7 +70,7 @@ public class ClassicGameManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
         {
             victory();
-        }
+        }*/
     }
 
 
@@ -82,8 +82,8 @@ public class ClassicGameManager : MonoBehaviour
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry", baseEmojiPosition2, Quaternion.identity, 0);
         GameObject.Find("Angry(Clone)").name = "angry1";
 
-        angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
-        angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
+        //angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
+        //angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
 
     }
 
