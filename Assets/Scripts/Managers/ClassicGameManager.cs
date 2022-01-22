@@ -140,18 +140,17 @@ public class ClassicGameManager : GameManager
             if (String.Equals(selected1, structEmoji.emojiName))
             {
                 selected1 = "none1";
-                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
-
+                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else
             {
                 if (String.Equals(selected1, structEmoji.emojiName))
                 {
                     Debug.Log(selected1 + "(Clone)");
-                    GameObject.Find(selected1 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                    GameObject.Find(selected1 + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                 }
                 selected1 = structEmoji.emojiName;
-                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         } else
         {
@@ -161,7 +160,7 @@ public class ClassicGameManager : GameManager
                 if (String.Equals(selected2, structEmoji.emojiName))
                 {
                     selected2 = "none2";
-                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
 
                 }
                 else
@@ -169,10 +168,10 @@ public class ClassicGameManager : GameManager
                     if (String.Equals(selected2, structEmoji.emojiName))
                     {
                         Debug.Log(selected2 + "(Clone)");
-                        GameObject.Find(selected2 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                        GameObject.Find(selected2 + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                     }
                     selected2 = structEmoji.emojiName;
-                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
             else
