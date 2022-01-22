@@ -26,8 +26,8 @@ public class ClassicGameManager : MonoBehaviour
 
     public GameObject angry1;
     public GameObject angry2;
-    private GameObject angryButton1;
-    private GameObject angryButton2;
+    public GameObject crying1;
+    public GameObject crying2;
 
     int init = 0;
 
@@ -40,8 +40,8 @@ public class ClassicGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(init==0)
+
+        if (init == 0)
         {
             init++;
             if (PhotonNetwork.IsMasterClient)
@@ -49,7 +49,7 @@ public class ClassicGameManager : MonoBehaviour
                 SpawnEmojis();
             }
         }
-        
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -64,7 +64,7 @@ public class ClassicGameManager : MonoBehaviour
         if (selected1 == selected2)
         {
             Destroy(GameObject.Find(selected1.ToString() + "1").gameObject);
-            Destroy(GameObject.Find(selected1+"2").gameObject);
+            Destroy(GameObject.Find(selected1 + "2").gameObject);
         }
 
         if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
@@ -77,14 +77,75 @@ public class ClassicGameManager : MonoBehaviour
 
     public void SpawnEmojis()
     {
+        Vector3 pos1 = new Vector3(1f, 0f, 0f);
         angry1 = PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1, Quaternion.identity, 0);
-        //GameObject.Find("Angry(Clone)").name = "angry1";
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2, Quaternion.identity, 0);
-        //GameObject.Find("Angry(Clone)").name = "angry2";
+        crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+    }
 
-        //angryButton1 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, 1.1f), Quaternion.identity, 0);
-        //angryButton2 = PhotonNetwork.Instantiate("Models/Prefab/emojiButton", new Vector3(1, 3, -1.1f), Quaternion.identity, 0);
 
+    public void ClickOnAngry1()
+    {
+        Debug.Log("ClickOnAngry1");
+        OnClick1("Angry1(Clone)", EmojiEnum.angry);
+    }
+
+    public void ClickOnAngry2()
+    {
+        Debug.Log("ClickOnAngry2");
+        OnClick2("Angry2(Clone)", EmojiEnum.angry);
+    }
+
+    public void ClickOnCrying1()
+    {
+        Debug.Log("ClickOnCrying1");
+        OnClick1("Crying1(Clone)", EmojiEnum.angry);
+    }
+
+    public void ClickOnCrying2()
+    {
+        Debug.Log("ClickOnCrying2");
+        OnClick2("Crying2(Clone)", EmojiEnum.angry);
+    }
+
+    void OnClick1(string gameObjectName, EmojiEnum emojiName)
+    {
+        if (selected1.CompareTo(emojiName) == 0)
+        {
+            selected1 = EmojiEnum.none1;
+            GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+
+        }
+        else
+        {
+            if (selected1.CompareTo(EmojiEnum.none1) != 0)
+            {
+                GameObject.Find(selected1.ToString() + "1").transform.localScale = new Vector3(50f, 50f, 50f);
+            }
+            selected1 = emojiName;
+            GameObject.Find(gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+        }
+    }
+
+    void OnClick2(string gameObjectName, EmojiEnum emojiName)
+    {
+        if (selected2.CompareTo(emojiName) == 0)
+        {
+            GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+            selected2 = EmojiEnum.none2;
+        }
+        else
+        {
+            if (selected2.CompareTo(EmojiEnum.none2) != 0)
+            {
+                GameObject.Find(selected2.ToString() + "2").transform.localScale = new Vector3(50f, 50f, 50f);
+            }
+
+            selected2 = emojiName;
+            GameObject.Find(gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
+
+        }
     }
 
     void victory()
