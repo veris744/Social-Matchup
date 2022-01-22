@@ -41,7 +41,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Destroy(this.gameObject);
     }
 
-
+    
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -71,7 +71,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         lobby = new TypedLobby("MyLobby", LobbyType.Default);
         PhotonNetwork.JoinLobby(lobby);
     }
-
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -106,8 +106,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log("Disconnection cause: " + cause);
-
+        Debug.Log("Disconnection cause: "+ cause);
+        
         //failed to reach photon server
         if (cause == DisconnectCause.Exception || cause == DisconnectCause.ExceptionOnConnect)
         {
@@ -115,7 +115,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 SceneManager.LoadScene("MainMenu");
             Debug.Log("Connection failed!");
         }
-
+        
         //disconnection happens after connection setup 
         else
         {
@@ -123,7 +123,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 SceneManager.LoadScene("MainMenu");
             Debug.Log("Disconnected from server!");
         }
-
+        
         Connect();
         Debug.Log("Trying to connnnect...");
     }
@@ -179,7 +179,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 case 1:
                     PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
                     gameObject.GetPhotonView().RPC("SetGameParameters", RpcTarget.Others, Task, Location, NumberOfImages, AudioChat, pvp);
-                    PhotonNetwork.LoadLevel(Task + "Game");
+                    PhotonNetwork.LoadLevel(Task+"Game");
                     StartCoroutine(StartGameAndInstantiateGameManager(pvp));
                     break;
                 case 2:

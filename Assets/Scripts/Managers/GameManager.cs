@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {
+    {   
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
+        
         if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
             helper = GameObject.FindGameObjectsWithTag("Helper")[0];
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
+        
 
         Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
