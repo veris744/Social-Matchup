@@ -108,10 +108,15 @@ public class ClassicGameManager : GameManager
                 */
             }
         }
-        if (selected1 == selected2)
+        if (String.Equals(selected1, selected2))
         {
-            Destroy(GameObject.Find(selected1.ToString() + "1").gameObject);
-            Destroy(GameObject.Find(selected1 + "2").gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Destroy(GameObject.Find(selected1 + "(Clone)").gameObject);
+                Destroy(GameObject.Find(selected2 + "(Clone)").gameObject);
+                selected1 = "none1";
+                selected2 = "none2";
+            }
         }
 
         if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
