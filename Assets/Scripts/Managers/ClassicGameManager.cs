@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -38,8 +39,8 @@ public class ClassicGameManager : GameManager
         return structEmoji;
     }
 
-    public string selected1 = null;
-    public string selected2 = null;
+    public string selected1 = "none1";
+    public string selected2 = "none2";
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
@@ -125,15 +126,16 @@ public class ClassicGameManager : GameManager
     {
         if(structEmoji.number == 1)
         {
-            if (selected1.CompareTo(structEmoji.emojiName) == 0)
+            Debug.Log("selected1: " + selected1);
+            if (String.Equals(selected1, structEmoji.emojiName))
             {
-                selected1 = null;
+                selected1 = "none1";
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
 
             }
             else
             {
-                if (selected1.CompareTo(structEmoji.emojiName) != 0)
+                if (!String.Equals(selected1, structEmoji.emojiName))
                 {
                     GameObject.Find(selected1.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
                 }
@@ -142,17 +144,18 @@ public class ClassicGameManager : GameManager
             }
         } else
         {
+            Debug.Log("selected1: " + selected1);
             if (structEmoji.number == 2)
             {
-                if (selected2.CompareTo(structEmoji.emojiName) == 0)
+                if (String.Equals(selected2, structEmoji.emojiName))
                 {
-                    selected2 = null;
+                    selected2 = "none2";
                     GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
 
                 }
                 else
                 {
-                    if (selected2.CompareTo(structEmoji.emojiName) != 0)
+                    if (!String.Equals(selected2, structEmoji.emojiName))
                     {
                         GameObject.Find(selected2.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
                     }
