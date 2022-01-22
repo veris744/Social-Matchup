@@ -40,7 +40,7 @@ public class ClassicGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         if(init==0)
         {
             init++;
@@ -70,7 +70,7 @@ public class ClassicGameManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
         {
             victory();
-        }*/
+        }
     }
 
 
