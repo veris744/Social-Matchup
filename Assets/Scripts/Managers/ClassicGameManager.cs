@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class ClassicGameManager : GameManager
 {
 
-    struct EmojiStruct
+    public struct EmojiStruct
     {
         public string gameObjectName; // Angry1(Clone)
         public string emojiName; // Angry1
@@ -47,8 +47,8 @@ public class ClassicGameManager : GameManager
         return structEmoji;
     }
 
-    public string selected1 = "none1";
-    public string selected2 = "none2";
+    public EmojiStruct selected1;
+    public EmojiStruct selected2;
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
@@ -60,13 +60,25 @@ public class ClassicGameManager : GameManager
 
     int init = 0;
 
+    void ResetSelected1()
+    {
+        selected1.emojiName = "none1";
+        selected1.gameObjectName = "none1";
+        selected1.number = 0;
+    }
+    private void ResetSelected2()
+    {
+        selected2.emojiName = "none2";
+        selected2.gameObjectName = "none2";
+        selected2.number = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        selected1 = "none1";
-        selected2 = "none2";
-}
+        ResetSelected1();
+        ResetSelected2();
+    }
 
     // Update is called once per frame
     void Update()
@@ -114,8 +126,8 @@ public class ClassicGameManager : GameManager
             {
                 Destroy(GameObject.Find(selected1 + "(Clone)").gameObject);
                 Destroy(GameObject.Find(selected2 + "(Clone)").gameObject);
-                selected1 = "none1";
-                selected2 = "none2";
+                ResetSelected1();
+                ResetSelected2();
             }
         }
 
@@ -144,40 +156,40 @@ public class ClassicGameManager : GameManager
             if (String.Equals(selected1, structEmoji.emojiName))
             {
                 Debug.Log(selected1 + " equals " + structEmoji.emojiName);
-                selected1 = "none1";
+                ResetSelected1();
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else
             {
-                Debug.Log(selected1 + "not equals " + structEmoji.emojiName);
-                if (!String.Equals(selected1, "none1"))
+                Debug.Log(selected1.emojiName + "not equals " + structEmoji.emojiName);
+                if (!String.Equals(selected1.emojiName, "none1"))
                 {
-                    Debug.Log(selected1 + "not equals none1");
-                    GameObject.Find(selected1 + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
+                    Debug.Log(selected1.emojiName + "not equals none1");
+                    GameObject.Find(selected1.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                 }
-                selected1 = structEmoji.emojiName;
+                selected1 = structEmoji;
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         } else
         {
             if (structEmoji.number == 2)
             {
-                if (String.Equals(selected2, structEmoji.emojiName))
+                if (String.Equals(selected2.emojiName, structEmoji.emojiName))
                 {
-                    Debug.Log(selected2 + " equals " + structEmoji.emojiName);
-                    selected2 = "none2";
+                    Debug.Log(selected2.emojiName + " equals " + structEmoji.emojiName);
+                    ResetSelected2();
                     GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
 
                 }
                 else
                 {
-                    Debug.Log(selected2 + "not equals " + structEmoji.emojiName);
-                    if (!String.Equals(selected2, "none2"))
+                    Debug.Log(selected2.emojiName + "not equals " + structEmoji.emojiName);
+                    if (!String.Equals(selected2.emojiName, "none2"))
                     {
-                        Debug.Log(selected1 + "not equals none1");
-                        GameObject.Find(selected2 + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
+                        Debug.Log(selected2.emojiName + "not equals none1");
+                        GameObject.Find(selected2.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                     }
-                    selected2 = structEmoji.emojiName;
+                    selected2 = structEmoji;
                     GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
