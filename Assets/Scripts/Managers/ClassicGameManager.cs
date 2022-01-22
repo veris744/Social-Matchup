@@ -137,7 +137,7 @@ public class ClassicGameManager : GameManager
             }
             else
             {
-                if (!String.Equals(selected1, structEmoji.emojiName))
+                if (String.Equals(selected1, structEmoji.emojiName))
                 {
                     Debug.Log(selected1 + "(Clone)");
                     GameObject.Find(selected1 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
@@ -158,7 +158,7 @@ public class ClassicGameManager : GameManager
                 }
                 else
                 {
-                    if (!String.Equals(selected2, structEmoji.emojiName))
+                    if (String.Equals(selected2, structEmoji.emojiName))
                     {
                         Debug.Log(selected2 + "(Clone)");
                         GameObject.Find(selected2 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
