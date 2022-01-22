@@ -1,25 +1,45 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ClassicGameManager : GameManager
 {
-    public enum EmojiEnum
+
+    struct EmojiStruct
     {
-        none1,
-        none2,
-        angry,
-        crying,
-        embarassed,
-        laughing,
-        scared,
-        smiling
+        public string gameObjectName; // Angry1(Clone)
+        public string emojiName; // Angry1
+        public int number; //1
+    };
+
+    EmojiStruct StringToEmojiStruct(string s)
+    {
+        EmojiStruct structEmoji;
+        structEmoji.gameObjectName = s;
+        structEmoji.emojiName = "none";
+        structEmoji.number = 0;
+        switch (s)
+        {
+            case "Angry1(Clone)":
+                structEmoji.emojiName = "Angry1";
+                structEmoji.number = 1;
+                break;
+            case "Angry2(Clone)":
+                structEmoji.emojiName = "Angry2";
+                structEmoji.number = 2;
+                break;
+            default:
+                break;
+
+        }
+        return structEmoji;
     }
 
-    public EmojiEnum selected1 = EmojiEnum.none1;
-    public EmojiEnum selected2 = EmojiEnum.none2;
+    public string selected1 = null;
+    public string selected2 = null;
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
@@ -59,7 +79,8 @@ public class ClassicGameManager : GameManager
             if (Physics.Raycast(ray, out hit, 100))
             {
                 Debug.Log("Object clicked: " + hit.transform.gameObject.name);
-
+                EmojiStruct emjStruct = StringToEmojiStruct(hit.transform.gameObject.name);
+                OnClick(emjStruct);
                 /*
                 if (thisPlayer.GetInstanceID() == 1001)
                 {
@@ -99,66 +120,22 @@ public class ClassicGameManager : GameManager
     }
 
 
-    public void ClickOnAngry1()
+    void OnClick(EmojiStruct structEmoji)
     {
-        Debug.Log("ClickOnAngry1");
-        OnClick1("Angry1(Clone)", EmojiEnum.angry);
-    }
-
-    public void ClickOnAngry2()
-    {
-        Debug.Log("ClickOnAngry2");
-        OnClick2("Angry2(Clone)", EmojiEnum.angry);
-    }
-
-    public void ClickOnCrying1()
-    {
-        Debug.Log("ClickOnCrying1");
-        OnClick1("Crying1(Clone)", EmojiEnum.angry);
-    }
-
-    public void ClickOnCrying2()
-    {
-        Debug.Log("ClickOnCrying2");
-        OnClick2("Crying2(Clone)", EmojiEnum.angry);
-    }
-
-    void OnClick1(string gameObjectName, EmojiEnum emojiName)
-    {
-        if (selected1.CompareTo(emojiName) == 0)
+        if (selected1.CompareTo(structEmoji.emojiName) == 0)
         {
-            selected1 = EmojiEnum.none1;
-            GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
+            selected1 = null;
+            GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
 
         }
         else
         {
-            if (selected1.CompareTo(EmojiEnum.none1) != 0)
+            if (selected1.CompareTo(structEmoji.emojiName) != 0)
             {
-                GameObject.Find(selected1.ToString() + "1").transform.localScale = new Vector3(50f, 50f, 50f);
+                GameObject.Find(selected1.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
             }
-            selected1 = emojiName;
-            GameObject.Find(gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
-        }
-    }
-
-    void OnClick2(string gameObjectName, EmojiEnum emojiName)
-    {
-        if (selected2.CompareTo(emojiName) == 0)
-        {
-            GameObject.Find(gameObjectName).transform.localScale = new Vector3(50f, 50f, 50f);
-            selected2 = EmojiEnum.none2;
-        }
-        else
-        {
-            if (selected2.CompareTo(EmojiEnum.none2) != 0)
-            {
-                GameObject.Find(selected2.ToString() + "2").transform.localScale = new Vector3(50f, 50f, 50f);
-            }
-
-            selected2 = emojiName;
-            GameObject.Find(gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
-
+            selected1 = structEmoji.emojiName;
+            GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
         }
     }
 
