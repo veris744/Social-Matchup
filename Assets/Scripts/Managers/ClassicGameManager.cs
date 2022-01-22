@@ -131,6 +131,7 @@ public class ClassicGameManager : GameManager
     {
         if(structEmoji.number == 1)
         {
+            Debug.Log(selected1.emojiName + " equals? " + structEmoji.emojiName);
             if (String.Equals(selected1, structEmoji.emojiName))
             {
                 ResetSelected1();
@@ -149,6 +150,7 @@ public class ClassicGameManager : GameManager
         {
             if (structEmoji.number == 2)
             {
+                Debug.Log(selected2.emojiName + " equals? " + structEmoji.emojiName);
                 if (String.Equals(selected2.emojiName, structEmoji.emojiName))
                 {
                     ResetSelected2();
