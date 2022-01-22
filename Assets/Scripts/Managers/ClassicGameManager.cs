@@ -56,7 +56,9 @@ public class ClassicGameManager : GameManager
     // Start is called before the first frame update
     void Start()
     {
-    }
+        selected1 = "none1";
+        selected2 = "none2";
+}
 
     // Update is called once per frame
     void Update()
@@ -137,7 +139,8 @@ public class ClassicGameManager : GameManager
             {
                 if (!String.Equals(selected1, structEmoji.emojiName))
                 {
-                    GameObject.Find(selected1.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                    Debug.Log(selected1 + "(Clone)");
+                    GameObject.Find(selected1 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
                 }
                 selected1 = structEmoji.emojiName;
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
@@ -157,7 +160,8 @@ public class ClassicGameManager : GameManager
                 {
                     if (!String.Equals(selected2, structEmoji.emojiName))
                     {
-                        GameObject.Find(selected2.ToString() + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
+                        Debug.Log(selected2 + "(Clone)");
+                        GameObject.Find(selected2 + "(Clone)").transform.localScale = new Vector3(50f, 50f, 50f);
                     }
                     selected2 = structEmoji.emojiName;
                     GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(75f, 75f, 75f);
