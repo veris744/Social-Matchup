@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClassicGameManager : MonoBehaviour
+public class ClassicGameManager : GameManager
 {
     public enum EmojiEnum
     {
@@ -59,6 +59,17 @@ public class ClassicGameManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 Debug.Log("Object clicked: " + hit.transform.gameObject.name);
+                if (thisPlayer.GetInstanceID() == 1001)
+                {
+                    Debug.Log("player 1001");
+                }
+                else
+                {
+                    if(thisPlayer.GetInstanceID() == 2001)
+                    {
+                        Debug.Log("player 2001");
+                    }
+                }
             }
         }
         if (selected1 == selected2)
