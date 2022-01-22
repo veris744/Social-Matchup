@@ -21,6 +21,8 @@ public class ClassicGameManager : GameManager
     public EmojiStruct selected1;
     public EmojiStruct selected2;
 
+    public GameObject synchronization;
+
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
 
@@ -110,6 +112,7 @@ public class ClassicGameManager : GameManager
     public void SpawnEmojis()
     {
         Vector3 pos1 = new Vector3(1f, 0f, 0f);
+        synchronization = PhotonNetwork.Instantiate("Models/Prefab/Synchronization", new Vector3(0f, 0f, 0f), Quaternion.identity);
         PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1 + positionsArray[0], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2 + positionsArray[0], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + positionsArray[1], Quaternion.identity, 0);
