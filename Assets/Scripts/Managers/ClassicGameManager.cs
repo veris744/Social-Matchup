@@ -40,6 +40,46 @@ public class ClassicGameManager : GameManager
                 structEmoji.emojiName = "Crying2";
                 structEmoji.number = 2;
                 break;
+            case "Embarassed1(Clone)":
+                structEmoji.emojiName = "Embarassed1";
+                structEmoji.number = 1;
+                break;
+            case "Embarassed2(Clone)":
+                structEmoji.emojiName = "Embarassed2";
+                structEmoji.number = 2;
+                break;
+            case "Laughing1(Clone)":
+                structEmoji.emojiName = "Laughing1";
+                structEmoji.number = 1;
+                break;
+            case "Laughing2(Clone)":
+                structEmoji.emojiName = "Laughing2";
+                structEmoji.number = 2;
+                break;
+            case "Scared1(Clone)":
+                structEmoji.emojiName = "Scared1";
+                structEmoji.number = 1;
+                break;
+            case "Scared2(Clone)":
+                structEmoji.emojiName = "Scared2";
+                structEmoji.number = 2;
+                break;
+            case "Smiling1(Clone)":
+                structEmoji.emojiName = "Smiling1";
+                structEmoji.number = 1;
+                break;
+            case "Smiling2(Clone)":
+                structEmoji.emojiName = "Smiling2";
+                structEmoji.number = 2;
+                break;
+            case "Surprised1(Clone)":
+                structEmoji.emojiName = "Surprised1";
+                structEmoji.number = 1;
+                break;
+            case "Surprised2(Clone)":
+                structEmoji.emojiName = "Surprised2";
+                structEmoji.number = 2;
+                break;
             default:
                 break;
 
@@ -57,6 +97,17 @@ public class ClassicGameManager : GameManager
     public GameObject angry2;
     public GameObject crying1;
     public GameObject crying2;
+    public GameObject Embarassed1;
+    public GameObject Embarassed2;
+    public GameObject Laughing1;
+    public GameObject Laughing2;
+    public GameObject Scared1;
+    public GameObject Scared2;
+    public GameObject Smiling1;
+    public GameObject Smiling2;
+    public GameObject Surprised1;
+    public GameObject Surprised2;
+
 
     int init = 0;
 
@@ -101,9 +152,7 @@ public class ClassicGameManager : GameManager
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.Log("Object clicked: " + hit.transform.gameObject.name);
                 EmojiStruct emjStruct = StringToEmojiStruct(hit.transform.gameObject.name);
-                Debug.Log(emjStruct.gameObjectName + emjStruct.emojiName + emjStruct.number);
                 OnClick(emjStruct);
                 /*
                 if (thisPlayer.GetInstanceID() == 1001)
@@ -120,12 +169,12 @@ public class ClassicGameManager : GameManager
                 */
             }
         }
-        if (String.Equals(selected1, selected2))
+        if (String.Equals(selected1.emojiName, selected2.emojiName))
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Destroy(GameObject.Find(selected1 + "(Clone)").gameObject);
-                Destroy(GameObject.Find(selected2 + "(Clone)").gameObject);
+                PhotonNetwork.Destroy(GameObject.Find(selected1.gameObjectName).gameObject);
+                PhotonNetwork.Destroy(GameObject.Find(selected2.gameObjectName).gameObject);
                 ResetSelected1();
                 ResetSelected2();
             }
@@ -146,6 +195,16 @@ public class ClassicGameManager : GameManager
         angry2 = PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2, Quaternion.identity, 0);
         crying1 = PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
         crying2 = PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Laughing1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Laughing2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Scared1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Scared2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Smiling1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Smiling2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Surprised1", baseEmojiPosition1 + pos1, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Surprised2", baseEmojiPosition2 + pos1, Quaternion.identity, 0);
     }
 
 
@@ -155,16 +214,13 @@ public class ClassicGameManager : GameManager
         {
             if (String.Equals(selected1, structEmoji.emojiName))
             {
-                Debug.Log(selected1 + " equals " + structEmoji.emojiName);
                 ResetSelected1();
                 GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else
             {
-                Debug.Log(selected1.emojiName + "not equals " + structEmoji.emojiName);
                 if (!String.Equals(selected1.emojiName, "none1"))
                 {
-                    Debug.Log(selected1.emojiName + "not equals none1");
                     GameObject.Find(selected1.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                 }
                 selected1 = structEmoji;
@@ -176,17 +232,14 @@ public class ClassicGameManager : GameManager
             {
                 if (String.Equals(selected2.emojiName, structEmoji.emojiName))
                 {
-                    Debug.Log(selected2.emojiName + " equals " + structEmoji.emojiName);
                     ResetSelected2();
                     GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
 
                 }
                 else
                 {
-                    Debug.Log(selected2.emojiName + "not equals " + structEmoji.emojiName);
                     if (!String.Equals(selected2.emojiName, "none2"))
                     {
-                        Debug.Log(selected2.emojiName + "not equals none1");
                         GameObject.Find(selected2.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                     }
                     selected2 = structEmoji;
@@ -195,7 +248,7 @@ public class ClassicGameManager : GameManager
             }
             else
             {
-                Debug.Log("warning: emojiStruct might not be instantiated");
+                Debug.Log("structEmoji.number is different to 1 or 2");
             }
         }
 
