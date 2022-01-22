@@ -32,6 +32,14 @@ public class ClassicGameManager : GameManager
                 structEmoji.emojiName = "Angry2";
                 structEmoji.number = 2;
                 break;
+            case "Crying1(Clone)":
+                structEmoji.emojiName = "Crying1";
+                structEmoji.number = 1;
+                break;
+            case "Crying2(Clone)":
+                structEmoji.emojiName = "Crying2";
+                structEmoji.number = 2;
+                break;
             default:
                 break;
 
