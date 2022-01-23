@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39c168c71bf8954f9a393abe8582cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
   synchronization: {fileID: 0}
 --- !u!114 &6310915715616687549
 MonoBehaviour:

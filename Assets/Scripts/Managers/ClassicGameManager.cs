@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.XR;
 
 public class ClassicGameManager : GameManager
 {
@@ -29,6 +30,7 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
     Vector3[] positionsArray;
     PhotonView photonView;
+    List<InputDevice> devices;
 
     int init = 0;
 
@@ -65,6 +67,10 @@ public class ClassicGameManager : GameManager
         ResetSelected2();
         positionsArray = new[] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f),
             new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
+
+        devices = new List<InputDevice>();
+        InputDeviceCharacteristics controllersCharacteristics = InputDeviceCharacteristics.Controller;
+        InputDevices.GetDevicesWithCharacteristics(controllersCharacteristics, devices);
     }
 
 
@@ -81,8 +87,10 @@ public class ClassicGameManager : GameManager
             }
         }
 
+        devices[0].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton1);
+        devices[1].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton2);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || gripButton1 || gripButton2)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
