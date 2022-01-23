@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 public class ClassicGameManager : GameManager
@@ -140,9 +141,33 @@ public class ClassicGameManager : GameManager
             {
                 finished2 = true;
             }
-            StartCoroutine(OnVictory());
+            photonView.RPC("StartVictoryAnimations", RpcTarget.All, null);
         }
     }
+
+
+    [PunRPC]
+    public void StartVictoryAnimations()
+    {
+        StartCoroutine(OnVictory());
+    }
+
+
+    protected IEnumerator OnVictory()
+    {
+        yield return new WaitForSeconds(1);
+        AudioManager.instance.PlayHurraySound();
+        yield return new WaitForSeconds(3);
+        AudioManager.instance.StopMusic();
+        yield return new WaitForSeconds(2);
+        AudioManager.instance.PlayVictorySound();
+
+        yield return new WaitForSeconds(6);
+        SceneManager.LoadScene("MainMenu");
+
+        PhotonNetwork.LeaveRoom();
+    }
+
 
     public static Vector3[] Shuffle(Vector3[] array)
     {
