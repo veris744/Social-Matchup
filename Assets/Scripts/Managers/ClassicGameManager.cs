@@ -37,11 +37,13 @@ public class ClassicGameManager : GameManager
     {
         selected1.emojiName = "none1";
         selected1.gameObjectName = "none1";
+        selected1.emoji = "none1";
         selected1.number = 0;
     }
     private void ResetSelected2()
     {
         selected2.emojiName = "none2";
+        selected2.gameObjectName = "none2";
         selected2.gameObjectName = "none2";
         selected2.number = 0;
     }
@@ -107,15 +109,16 @@ public class ClassicGameManager : GameManager
         }
         if (String.Equals(selected1.emoji, selected2.emoji))
         {
-            Debug.Log("selected1 equals selected2");
+            Debug.Log(selected1.emojiName + "selected1 equals selected2" + selected2.emojiName);
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.Log("master client");
-                PhotonNetwork.Destroy(GameObject.Find(selected1.gameObjectName).gameObject);
+                PhotonNetwork.Destroy(GameObject.Find(selected1.gameObjectName));
                 PhotonNetwork.Destroy(GameObject.Find(selected2.gameObjectName).gameObject);
-                ResetSelected1();
-                ResetSelected2();
             }
+
+            ResetSelected1();
+            ResetSelected2();
         }
 
         if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
