@@ -16,6 +16,7 @@ public class ClassicGameManager : GameManager
         public int number; //1
     };
 
+    public bool selected;
     
 
     public EmojiStruct selected1;
@@ -27,6 +28,7 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
 
     Vector3[] positionsArray;
+    PhotonView photonView;
 
     int init = 0;
 
@@ -46,6 +48,7 @@ public class ClassicGameManager : GameManager
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         ResetSelected1();
         ResetSelected2();
         positionsArray = new [] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f), 
@@ -74,7 +77,8 @@ public class ClassicGameManager : GameManager
             if (Physics.Raycast(ray, out hit, 100))
             {
                 EmojiStruct emjStruct = StringToEmojiStruct(hit.transform.gameObject.name);
-                OnClick(emjStruct);
+                //OnClick(emjStruct);
+                photonView.RPC("OnClick", RpcTarget.All, emjStruct.number, emjStruct.emojiName, emjStruct.gameObjectName);
                 /*
                 if (thisPlayer.GetInstanceID() == 1001)
                 {
@@ -129,16 +133,17 @@ public class ClassicGameManager : GameManager
         PhotonNetwork.Instantiate("Models/Prefab/Surprised2", baseEmojiPosition2 + positionsArray[6], Quaternion.identity, 0);
     }
 
-
-    void OnClick(EmojiStruct structEmoji)
+    [PunRPC]
+    void OnClick(int n, String name, String goName)
     {
-        if(structEmoji.number == 1)
+        if(n == 1)
         {
-            Debug.Log(selected1.emojiName + " equals? " + structEmoji.emojiName);
-            if (String.Equals(selected1.emojiName, structEmoji.emojiName))
+            selected = true;
+            Debug.Log(selected1.emojiName + " equals? " + name);
+            if (String.Equals(selected1.emojiName, name))
             {
                 ResetSelected1();
-                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
+                GameObject.Find(name).transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else
             {
@@ -146,18 +151,19 @@ public class ClassicGameManager : GameManager
                 {
                     GameObject.Find(selected1.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                 }
-                selected1 = structEmoji;
-                GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                //selected1 = structEmoji;
+                GameObject.Find(goName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         } else
         {
-            if (structEmoji.number == 2)
+            selected = true;
+            if (n == 2)
             {
-                Debug.Log(selected2.emojiName + " equals? " + structEmoji.emojiName);
-                if (String.Equals(selected2.emojiName, structEmoji.emojiName))
+                Debug.Log(selected2.emojiName + " equals? " + name);
+                if (String.Equals(selected2.emojiName, name))
                 {
                     ResetSelected2();
-                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1f, 1f, 1f);
+                    GameObject.Find(name).transform.localScale = new Vector3(1f, 1f, 1f);
 
                 }
                 else
@@ -166,8 +172,8 @@ public class ClassicGameManager : GameManager
                     {
                         GameObject.Find(selected2.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                     }
-                    selected2 = structEmoji;
-                    GameObject.Find(structEmoji.gameObjectName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    //selected2 = structEmoji;
+                    GameObject.Find(goName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
             else

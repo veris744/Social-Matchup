@@ -255,7 +255,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         //enabling audioChat
         if (AudioChat) EnableAudioChat(player);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
+        //else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
 
         gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
