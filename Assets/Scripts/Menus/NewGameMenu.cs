@@ -10,6 +10,7 @@ public class NewGameMenu : MonoBehaviour
     private byte numberOfPlayers;
     private bool audioChat, hasHelper;
 
+    public GameObject RoomId;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,8 @@ public class NewGameMenu : MonoBehaviour
         int idRoom = rnd.Next(0, 10000);
         PhotonManager.instance.CreateRoom(task + " - " + idRoom);
 
+
+        RoomId.gameObject.GetComponent<TextMeshProUGUI>().text = "ROOM-" + idRoom;
     }
 
 }
