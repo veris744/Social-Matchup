@@ -87,10 +87,22 @@ public class ClassicGameManager : GameManager
             }
         }
 
-        devices[0].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton1);
-        devices[1].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton2);
+        bool gripButton = false;
 
-        if (Input.GetMouseButtonDown(0) || gripButton1 || gripButton2)
+        if (devices.Count == 2) {
+            devices[0].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton1);
+            devices[1].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton2);
+            gripButton = gripButton1 || gripButton2;
+        } else if (devices.Count == 4)
+        {
+            devices[0].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton1);
+            devices[1].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton2);
+            devices[2].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton3);
+            devices[3].TryGetFeatureValue(CommonUsages.gripButton, out bool gripButton4);
+            gripButton = gripButton1 || gripButton2 || gripButton3 || gripButton4;
+        }
+
+        if (Input.GetMouseButtonDown(0) || gripButton)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
