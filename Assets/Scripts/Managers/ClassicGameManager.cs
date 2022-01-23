@@ -38,6 +38,8 @@ public class ClassicGameManager : GameManager
     bool smiling2;
     bool laughing2;
 
+    bool done;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +67,8 @@ public class ClassicGameManager : GameManager
         involve2 = false;
         smiling2 = false;
         laughing2 = false;
+
+        done = false;
     }
 
 
@@ -132,7 +136,7 @@ public class ClassicGameManager : GameManager
         }
 
 
-        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0 && objectCreated && (!finished1 || !finished2))
+        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0 && objectCreated && (!finished1 || !finished2) & !done)
         {
             if (PhotonNetwork.IsMasterClient)
             {
@@ -155,14 +159,13 @@ public class ClassicGameManager : GameManager
 
     protected IEnumerator OnVictory()
     {
+        done = true;
         yield return new WaitForSeconds(1);
         AudioManager.instance.PlayHurraySound();
         yield return new WaitForSeconds(3);
         AudioManager.instance.StopMusic();
-        yield return new WaitForSeconds(2);
-        AudioManager.instance.PlayVictorySound();
 
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene("MainMenu");
 
         PhotonNetwork.LeaveRoom();

@@ -27,7 +27,7 @@ public class NewGameMenu : MonoBehaviour
 
         numberOfImages = GameObject.Find("NumberOfImagesButton").transform.Find("Label").GetComponent<TextMeshProUGUI>().text;
 
-        audioChat = GameObject.Find("AudioChatToggle").GetComponent<Toggle>().isOn;
+        //audioChat = GameObject.Find("AudioChatToggle").GetComponent<Toggle>().isOn;
 
         hasHelper = GameObject.Find("HelperToggle").GetComponent<Toggle>().isOn;
 
@@ -42,7 +42,7 @@ public class NewGameMenu : MonoBehaviour
         PhotonManager.instance.Location = "Castle";
         PhotonManager.instance.Task = task;
         PhotonManager.instance.NumberOfImages = System.Convert.ToInt32(numberOfImages);
-        PhotonManager.instance.AudioChat = audioChat;
+        PhotonManager.instance.AudioChat = false;
         PhotonManager.instance.NumberOfPlayers = numberOfPlayers;
         PhotonManager.instance.pvp = false;
 
