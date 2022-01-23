@@ -10,7 +10,7 @@ public class NewGameMenu : MonoBehaviour
     private byte numberOfPlayers;
     private bool audioChat, hasHelper;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
