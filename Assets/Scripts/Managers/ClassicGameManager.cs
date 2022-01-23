@@ -146,15 +146,27 @@ public class ClassicGameManager : GameManager
 
     public void SpawnEmojis()
     {
+        string[] prefabs1 = new string[] { "Angry1", "Crying1", "Embarassed1", "Laughing1", "Involve1", "Smiling1", "Smiling1", "Surprised1" };
         positionsArray = Shuffle(positionsArray);
-        PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1 + positionsArray[0], Quaternion.identity, 0);
+        for (int i = 0; i < PhotonManager.instance.NumberOfImages; i++)
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/" + prefabs1[i], baseEmojiPosition1 + positionsArray[i], Quaternion.identity, 0);
+        }
+        /*
         PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + positionsArray[1], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", baseEmojiPosition1 + positionsArray[2], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", baseEmojiPosition1 + positionsArray[3], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Involve1", baseEmojiPosition1 + positionsArray[4], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling1", baseEmojiPosition1 + positionsArray[5], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised1", baseEmojiPosition1 + positionsArray[6], Quaternion.identity, 0);
-
+        */
+        string[] prefabs2 = new string[] { "Angry2", "Crying2", "Embarassed2", "Laughing2", "Involve2", "Smiling2", "Smiling2", "Surprised2" };
+        positionsArray = Shuffle(positionsArray);
+        for (int i = 0; i < PhotonManager.instance.NumberOfImages; i++)
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/" + prefabs2[i], baseEmojiPosition1 + positionsArray[i], Quaternion.identity, 0);
+        }
+        /*
         positionsArray = Shuffle(positionsArray);
         PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2 + positionsArray[0], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + positionsArray[1], Quaternion.identity, 0);
@@ -163,6 +175,7 @@ public class ClassicGameManager : GameManager
         PhotonNetwork.Instantiate("Models/Prefab/Involve2", baseEmojiPosition2 + positionsArray[4], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling2", baseEmojiPosition2 + positionsArray[5], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised2", baseEmojiPosition2 + positionsArray[6], Quaternion.identity, 0);
+        */
     }
 
     [PunRPC]
