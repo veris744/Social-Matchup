@@ -45,6 +45,20 @@ MonoBehaviour:
   - RespawnSpaceship
   - StartVictoryAnimations
   - OnClick
+  - selectAngry1
+  - selectAngry2
+  - selectCrying1
+  - selectCrying2
+  - selectEmbarassed1
+  - selectEmbarassed2
+  - selectInvolve1
+  - selectInvolve2
+  - selectLaughing1
+  - selectLaughing2
+  - selectSmiling1
+  - selectSmiling2
+  - selectSurprised1
+  - selectSurprised2
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
