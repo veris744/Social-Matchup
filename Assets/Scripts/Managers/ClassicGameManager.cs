@@ -45,6 +45,15 @@ public class ClassicGameManager : GameManager
         selected2.number = 0;
     }
 
+    EmojiStruct CreateEmojiStruct(string gameObject, string emjName, int n)
+    {
+        EmojiStruct res;
+        res.gameObjectName = gameObject;
+        res.emojiName = emjName;
+        res.number = n;
+        return res;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +148,6 @@ public class ClassicGameManager : GameManager
         if(n == 1)
         {
             selected = true;
-            Debug.Log(selected1.emojiName + " equals? " + name);
             if (String.Equals(selected1.emojiName, name))
             {
                 ResetSelected1();
@@ -151,7 +159,7 @@ public class ClassicGameManager : GameManager
                 {
                     GameObject.Find(selected1.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                 }
-                //selected1 = structEmoji;
+                selected1 = CreateEmojiStruct(goName, name, n);
                 GameObject.Find(goName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         } else
@@ -159,7 +167,6 @@ public class ClassicGameManager : GameManager
             selected = true;
             if (n == 2)
             {
-                Debug.Log(selected2.emojiName + " equals? " + name);
                 if (String.Equals(selected2.emojiName, name))
                 {
                     ResetSelected2();
@@ -172,7 +179,7 @@ public class ClassicGameManager : GameManager
                     {
                         GameObject.Find(selected2.emojiName + "(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
                     }
-                    //selected2 = structEmoji;
+                    selected2 = CreateEmojiStruct(goName, name, n);
                     GameObject.Find(goName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
