@@ -165,7 +165,7 @@ public class ClassicGameManager : GameManager
         yield return new WaitForSeconds(3);
         AudioManager.instance.StopMusic();
 
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
 
         PhotonNetwork.LeaveRoom();
