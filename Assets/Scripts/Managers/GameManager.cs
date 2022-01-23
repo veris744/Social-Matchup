@@ -102,13 +102,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         AudioManager.instance.PlayVictorySound();
 
-        Debug.Log("thisPlayer = " + thisPlayer.name);
-        Debug.Log("BlackPanel = " + thisPlayer.transform.Find("BlackPanel").name);
-        Debug.Log("Sprite renderer = " + thisPlayer.transform.Find("BlackPanel").GetComponent<SpriteRenderer>().ToString());
-
-        SpriteRenderer endGamePanel = thisPlayer.transform.Find("BlackPanel").GetComponent<SpriteRenderer>();
-        endGamePanel.color = Color.black;
-
         yield return new WaitForSeconds(6);
         SceneManager.LoadScene("MainMenu");
 

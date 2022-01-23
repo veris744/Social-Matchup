@@ -14,6 +14,8 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
     Vector3[] positionsArray;
     PhotonView photonView;
+    bool objectCreated;
+    bool finished;
 
     int init = 0;
 
@@ -40,6 +42,9 @@ public class ClassicGameManager : GameManager
         photonView = GetComponent<PhotonView>();
         positionsArray = new[] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f),
             new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
+
+        objectCreated = false;
+        finished = false;
 
         angry1 = false;
         embarassed1 = false;
@@ -124,9 +129,10 @@ public class ClassicGameManager : GameManager
         }
 
 
-        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0 && objectCreated && !finished)
         {
-            victory();
+            finished = true;
+            StartCoroutine(OnVictory());
         }
     }
 
@@ -161,6 +167,8 @@ public class ClassicGameManager : GameManager
         PhotonNetwork.Instantiate("Models/Prefab/Involve2", new Vector3(0.91f, 4, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling2", new Vector3(3.89f, 4, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised2", new Vector3(2.57f, 6, -1.25f), Quaternion.identity, 0);
+
+        objectCreated = true;
     }
 
 
