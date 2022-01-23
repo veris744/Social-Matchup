@@ -40,6 +40,23 @@ public class ClassicGameManager : GameManager
         photonView = GetComponent<PhotonView>();
         positionsArray = new[] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f),
             new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
+
+        angry1 = false;
+        embarassed1 = false;
+        crying1 = false;
+        surprised1 = false;
+        involve1 = false;
+        smiling1 = false;
+        laughing1 = false;
+
+
+        angry2 = false;
+        embarassed2 = false;
+        crying2 = false;
+        surprised2 = false;
+        involve2 = false;
+        smiling2 = false;
+        laughing2 = false;
     }
 
 
@@ -60,36 +77,50 @@ public class ClassicGameManager : GameManager
         {
             Destroy(GameObject.Find("Angry1(Clone)"));
             Destroy(GameObject.Find("Angry2(Clone)"));
+            Destroy(GameObject.Find("angryButton1"));
+            Destroy(GameObject.Find("angryButton2"));
         }
         if (embarassed1 && embarassed2)
         {
             Destroy(GameObject.Find("Embarassed1(Clone)"));
             Destroy(GameObject.Find("Embarassed2(Clone)"));
+            Destroy(GameObject.Find("embarassedButton1"));
+            Destroy(GameObject.Find("embarassedButton2"));
         }
         if (crying1 && crying2)
         {
             Destroy(GameObject.Find("Crying1(Clone)"));
             Destroy(GameObject.Find("Crying2(Clone)"));
+            Destroy(GameObject.Find("cryingButton1"));
+            Destroy(GameObject.Find("cryingButton2"));
         }
         if (surprised1 && surprised2)
         {
             Destroy(GameObject.Find("Surprised1(Clone)"));
             Destroy(GameObject.Find("Surprised2(Clone)"));
+            Destroy(GameObject.Find("surprisedButton1"));
+            Destroy(GameObject.Find("surprisedButton2"));
         }
         if (involve1 && involve2)
         {
             Destroy(GameObject.Find("Involve1(Clone)"));
             Destroy(GameObject.Find("Involve2(Clone)"));
+            Destroy(GameObject.Find("involveButton1"));
+            Destroy(GameObject.Find("involveButton2"));
         }
         if (smiling1 && smiling2)
         {
             Destroy(GameObject.Find("Smiling1(Clone)"));
             Destroy(GameObject.Find("Smiling2(Clone)"));
+            Destroy(GameObject.Find("smilingButton1"));
+            Destroy(GameObject.Find("smilingButton2"));
         }
         if (laughing1 && laughing2)
         {
             Destroy(GameObject.Find("Laughing1(Clone)"));
             Destroy(GameObject.Find("Laughing1(Clone)"));
+            Destroy(GameObject.Find("laughingButton1"));
+            Destroy(GameObject.Find("laughingButton2"));
         }
 
 
