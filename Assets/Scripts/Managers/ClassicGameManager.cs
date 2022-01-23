@@ -166,6 +166,7 @@ public class ClassicGameManager : GameManager
 
     public void clickAngry1()
     {
+        Debug.Log("click");
         if (!angry1)
         {
             GameObject.Find("Angry1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -213,6 +214,7 @@ public class ClassicGameManager : GameManager
 
     public void clickEmbarassed1()
     {
+        Debug.Log("click");
         if (!embarassed1)
         {
             GameObject.Find("Embarassed1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
@@ -261,6 +263,7 @@ public class ClassicGameManager : GameManager
 
     public void clickCrying1()
     {
+        Debug.Log("click");
         if (!crying1)
         {
             GameObject.Find("Crying1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
