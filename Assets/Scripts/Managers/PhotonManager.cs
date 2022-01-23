@@ -231,13 +231,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     }
 
-    private void EnableAudioChat(GameObject player)
-    {
-        player.GetComponent<Speaker>().enabled = true;
-        player.GetComponent<PhotonVoiceView>().enabled = true;
-        photonVoiceManager.GetComponent<Recorder>().IsRecording = true;
-    }
-
     [PunRPC]
     public void SetGameParameters(string task, string location, int numberOfElements, bool audioChat, bool pvp)
     {
