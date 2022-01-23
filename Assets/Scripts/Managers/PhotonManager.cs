@@ -29,7 +29,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private int order;
     private GameObject gameManager;
-    private GameObject photonVoiceManager;
     private TypedLobby lobby;
 
 
@@ -47,7 +46,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(this.gameObject);
         RoomInfoList = new Dictionary<string, RoomInfo>();
         PhotonNetwork.AutomaticallySyncScene = true;
-        photonVoiceManager = GameObject.Find("PhotonVoiceManager");
         Connect();
 
     }
