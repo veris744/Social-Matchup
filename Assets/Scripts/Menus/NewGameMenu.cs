@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class NewGameMenu : MonoBehaviour
 {
-    private string playerName, task, numberOfImages;
+    private string task, numberOfImages;
     private byte numberOfPlayers;
     private bool audioChat, hasHelper;
 
@@ -19,12 +19,6 @@ public class NewGameMenu : MonoBehaviour
 
     public void StartGame()
     {
-
-        playerName = GameObject.Find("NameInputField").GetComponent<TMP_InputField>().text;
-        if (playerName == "")
-            playerName = "PLAYER";
-
-
         numberOfImages = GameObject.Find("NumberOfImagesButton").transform.Find("Label").GetComponent<TextMeshProUGUI>().text;
 
         //audioChat = GameObject.Find("AudioChatToggle").GetComponent<Toggle>().isOn;
@@ -39,14 +33,16 @@ public class NewGameMenu : MonoBehaviour
         else
             numberOfPlayers = 2;
 
-        PhotonManager.instance.Location = "Castle";
+        PhotonManager.instance.Location = "Room";
         PhotonManager.instance.Task = task;
         PhotonManager.instance.NumberOfImages = System.Convert.ToInt32(numberOfImages);
         PhotonManager.instance.AudioChat = false;
         PhotonManager.instance.NumberOfPlayers = numberOfPlayers;
         PhotonManager.instance.pvp = false;
 
-        PhotonManager.instance.CreateRoom(playerName + " (" + task + " - " + numberOfImages + ")");
+        System.Random rnd = new System.Random();
+        int idRoom = rnd.Next(0, 10000);
+        PhotonManager.instance.CreateRoom(task + " - " + idRoom);
 
     }
 
