@@ -15,7 +15,8 @@ public class ClassicGameManager : GameManager
     Vector3[] positionsArray;
     PhotonView photonView;
     bool objectCreated;
-    bool finished;
+    bool finished1;
+    bool finished2;
 
     int init = 0;
 
@@ -44,7 +45,8 @@ public class ClassicGameManager : GameManager
             new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
 
         objectCreated = false;
-        finished = false;
+        finished1 = false;
+        finished2 = false;
 
         angry1 = false;
         embarassed1 = false;
@@ -129,9 +131,15 @@ public class ClassicGameManager : GameManager
         }
 
 
-        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0 && objectCreated && !finished)
+        if (GameObject.FindGameObjectsWithTag("Emoji").Length == 0 && objectCreated && (!finished1 || !finished2))
         {
-            finished = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                finished1 = true;
+            } else
+            {
+                finished2 = true;
+            }
             StartCoroutine(OnVictory());
         }
     }
@@ -497,14 +505,5 @@ public class ClassicGameManager : GameManager
         laughing2 = b;
     }
 
-
-
-
-
-
-    void victory()
-    {
-        Debug.Log("victory");
-    }
 
 }
