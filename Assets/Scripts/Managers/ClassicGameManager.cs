@@ -10,19 +10,6 @@ using UnityEngine.XR;
 public class ClassicGameManager : GameManager
 {
 
-    public struct EmojiStruct
-    {
-        public string gameObjectName; // Angry1(Clone)
-        public string emojiName; // Angry1
-        public string emoji; // Angry
-        public int number; //1
-    };
-
-    public bool selected1;
-    
-
-    public GameObject synchronization;
-
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
     Vector3[] positionsArray;
