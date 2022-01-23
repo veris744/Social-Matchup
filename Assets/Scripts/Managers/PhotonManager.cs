@@ -198,22 +198,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
         yield return new WaitForSeconds(5f);
 
-        if (playerNumber == 0)
-        {
-            player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -4), Quaternion.identity, 0);
+        player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -8), Quaternion.identity, 0);
 
-        }
-        else if (playerNumber == 1)
-        {
-            player = PhotonNetwork.Instantiate("Player", new Vector3(17, 3, 4), Quaternion.identity, 0);
-
-        }
-        else
-        {
-            player = PhotonNetwork.Instantiate("Player", new Vector3(12, 3, -4), Quaternion.identity, 0);
-
-        }
-
+        
 
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = false;
@@ -248,7 +235,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5f);
         GameObject player;
 
-        player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 4), new Quaternion(0, 1, 0, 0), 0);
+        player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 8), new Quaternion(0, 1, 0, 0), 0);
 
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
@@ -257,8 +244,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (AudioChat) EnableAudioChat(player);
         //else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
-
-        gameManager = PhotonNetwork.Instantiate("Managers/ClassicGameManager", Vector3.zero, Quaternion.identity, 0);
         //gameManager.GetComponent<GameManager>().SetPVP(pvp);
     }
 
