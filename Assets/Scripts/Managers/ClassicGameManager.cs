@@ -27,7 +27,6 @@ public class ClassicGameManager : GameManager
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
-
     Vector3[] positionsArray;
     PhotonView photonView;
 
@@ -64,12 +63,13 @@ public class ClassicGameManager : GameManager
         photonView = GetComponent<PhotonView>();
         ResetSelected1();
         ResetSelected2();
-        positionsArray = new [] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f), 
+        positionsArray = new[] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f),
             new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
     }
 
-    // Update is called once per frame
-    void Update()
+
+        // Update is called once per frame
+        void Update()
     {
 
         if (init == 0)
@@ -110,24 +110,38 @@ public class ClassicGameManager : GameManager
         }
     }
 
+    public static Vector3[] Shuffle(Vector3[] array)
+    {
+        System.Random rnd = new System.Random();
+        for (int i = 0; i < array.Length; i++)
+        {
+            int k = rnd.Next(0, i);
+            Vector3 value = array[k];
+            array[k] = array[i];
+            array[i] = value;
+        }
+        return array;
+    }
 
 
     public void SpawnEmojis()
     {
-        Vector3 pos1 = new Vector3(1f, 0f, 0f);
+        positionsArray = Shuffle(positionsArray);
         PhotonNetwork.Instantiate("Models/Prefab/Angry1", baseEmojiPosition1 + positionsArray[0], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2 + positionsArray[0], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Crying1", baseEmojiPosition1 + positionsArray[1], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + positionsArray[1], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", baseEmojiPosition1 + positionsArray[2], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", baseEmojiPosition2 + positionsArray[2], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", baseEmojiPosition1 + positionsArray[3], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Laughing2", baseEmojiPosition2 + positionsArray[3], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Involve1", baseEmojiPosition1 + positionsArray[4], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Involve2", baseEmojiPosition2 + positionsArray[4], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Smiling1", baseEmojiPosition1 + positionsArray[5], Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Smiling2", baseEmojiPosition2 + positionsArray[5], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised1", baseEmojiPosition1 + positionsArray[6], Quaternion.identity, 0);
+
+        positionsArray = Shuffle(positionsArray);
+        PhotonNetwork.Instantiate("Models/Prefab/Angry2", baseEmojiPosition2 + positionsArray[0], Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Crying2", baseEmojiPosition2 + positionsArray[1], Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", baseEmojiPosition2 + positionsArray[2], Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Laughing2", baseEmojiPosition2 + positionsArray[3], Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Involve2", baseEmojiPosition2 + positionsArray[4], Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Smiling2", baseEmojiPosition2 + positionsArray[5], Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Surprised2", baseEmojiPosition2 + positionsArray[6], Quaternion.identity, 0);
     }
 
