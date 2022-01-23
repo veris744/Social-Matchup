@@ -89,8 +89,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Debug.Log("Num of players in rooms: " + PhotonNetwork.CountOfPlayersInRooms);
             Debug.Log("Num of rooms: " + PhotonNetwork.CountOfRooms);
         } */
-
-        //Debug.Log("Task: " + Task + " - Number of Images: " + NumberOfImages + " - Audio chat: " + AudioChat + " - Number of players: " + NumberOfPlayers);
     }
 
     private void Connect()
@@ -146,7 +144,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         order = PhotonNetwork.CurrentRoom.PlayerCount;
-        Debug.Log("PlayerCount = " + order);
+        //Debug.Log("PlayerCount = " + order);
         this.gameObject.AddComponent<PhotonView>();
         gameObject.GetPhotonView().ViewID = PhotonNetwork.CurrentRoom.GetHashCode();
         StartCoroutine(WaitingForOtherPlayer());
@@ -206,10 +204,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         player.GetComponent<AudioListener>().enabled = false;
 
 
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(player);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
-
 
     }
 
@@ -223,9 +217,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //enabling audio listener 
         helper.GetComponent<AudioListener>().enabled = false;
 
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(helper);
-        else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
 
 
     }
@@ -240,11 +231,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;
 
-        //enabling audioChat
-        if (AudioChat) EnableAudioChat(player);
-        //else photonVoiceManager.GetComponent<Recorder>().IsRecording = false;
-
-        //gameManager.GetComponent<GameManager>().SetPVP(pvp);
     }
 
     private void EnableAudioChat(GameObject player)
@@ -285,7 +271,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
     {
-        //Debug.Log("players in lobby: " + lobbyStatistics.Count);
+        Debug.Log("players in lobby: " + lobbyStatistics.Count);
     }
 
     public Dictionary<string, RoomInfo> GetRoomList()

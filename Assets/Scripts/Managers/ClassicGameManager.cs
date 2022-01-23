@@ -14,7 +14,6 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
     Vector3[] positionsArray;
     PhotonView photonView;
-    List<InputDevice> devices;
 
     int init = 0;
 
