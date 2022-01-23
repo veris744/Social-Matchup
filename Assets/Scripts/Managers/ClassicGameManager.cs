@@ -185,21 +185,57 @@ public class ClassicGameManager : GameManager
 
     public void SpawnEmojis()
     {
-        PhotonNetwork.Instantiate("Models/Prefab/Angry1", new Vector3(3.89f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Crying1", new Vector3(2.57f, 6, 1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", new Vector3(0.91f, 4, 1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", new Vector3(0f, 6, 1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Involve1", new Vector3(-1.42f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Smiling1", new Vector3(-3.44f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Surprised1", new Vector3(-2.92f, 6, 1.25f), Quaternion.identity, 0);
 
-        PhotonNetwork.Instantiate("Models/Prefab/Angry2", new Vector3(-3.44f, 4, -1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Crying2", new Vector3(-2.92f, 6, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", new Vector3(-1.42f, 4, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing2", new Vector3(0f, 6, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Involve2", new Vector3(0.91f, 4, -1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Smiling2", new Vector3(3.89f, 4, -1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Surprised2", new Vector3(2.57f, 6, -1.25f), Quaternion.identity, 0);
+
+        GameObject.Find("angryButton1").gameObject.SetActive(false);
+        GameObject.Find("cryingButton1").gameObject.SetActive(false);
+        GameObject.Find("smilingButton1").gameObject.SetActive(false);
+        GameObject.Find("surprisedButton1").gameObject.SetActive(false);
+
+        GameObject.Find("angryButton2").gameObject.SetActive(false);
+        GameObject.Find("cryingButton2").gameObject.SetActive(false);
+        GameObject.Find("smilingButton2").gameObject.SetActive(false);
+        GameObject.Find("surprisedButton2").gameObject.SetActive(false);
+
+
+        if (PhotonManager.instance.NumberOfImages >= 4) 
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/Crying1", new Vector3(2.57f, 6, 1.25f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Models/Prefab/Crying2", new Vector3(-2.92f, 6, -1.25f), Quaternion.identity, 0);
+            GameObject.Find("cryingButton1").gameObject.SetActive(true);
+            GameObject.Find("cryingButton2").gameObject.SetActive(true);
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/Smiling1", new Vector3(-3.44f, 4, 1.25f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Models/Prefab/Smiling2", new Vector3(3.89f, 4, -1.25f), Quaternion.identity, 0);
+            GameObject.Find("smilingButton1").gameObject.SetActive(true);
+            GameObject.Find("smilingButton2").gameObject.SetActive(true);
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/Angry1", new Vector3(3.89f, 4, 1.25f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Models/Prefab/Angry2", new Vector3(-3.44f, 4, -1.25f), Quaternion.identity, 0);
+            GameObject.Find("angryButton1").gameObject.SetActive(true);
+            GameObject.Find("angryButton2").gameObject.SetActive(true);
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            PhotonNetwork.Instantiate("Models/Prefab/Surprised1", new Vector3(-2.92f, 6, 1.25f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Models/Prefab/Surprised2", new Vector3(2.57f, 6, -1.25f), Quaternion.identity, 0);
+            GameObject.Find("surprisedButton1").gameObject.SetActive(true);
+            GameObject.Find("surprisedButton2").gameObject.SetActive(true);
+        }
+
+
+
 
         objectCreated = true;
     }
