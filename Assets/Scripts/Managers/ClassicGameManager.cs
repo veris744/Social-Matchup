@@ -118,7 +118,7 @@ public class ClassicGameManager : GameManager
         if (laughing1 && laughing2)
         {
             Destroy(GameObject.Find("Laughing1(Clone)"));
-            Destroy(GameObject.Find("Laughing1(Clone)"));
+            Destroy(GameObject.Find("Laughing2(Clone)"));
             Destroy(GameObject.Find("laughingButton1"));
             Destroy(GameObject.Find("laughingButton2"));
         }
