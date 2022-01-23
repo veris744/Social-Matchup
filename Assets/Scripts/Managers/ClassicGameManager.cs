@@ -146,13 +146,13 @@ public class ClassicGameManager : GameManager
 
     public void SpawnEmojis()
     {
-        PhotonNetwork.Instantiate("Models/Prefab/Angry1", new Vector3(-3.44f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Crying1", new Vector3(-2.92f, 6, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", new Vector3(-1.42f, 4, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Angry1", new Vector3(3.89f, 4, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Crying1", new Vector3(2.57f, 6, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", new Vector3(0.91f, 4, 1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", new Vector3(0f, 6, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Involve1", new Vector3(0.91f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Smiling1", new Vector3(3.89f, 4, 1.25f), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("Models/Prefab/Surprised1", new Vector3(2.57f, 6, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Involve1", new Vector3(-1.42f, 4, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Smiling1", new Vector3(-3.44f, 4, 1.25f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Models/Prefab/Surprised1", new Vector3(-2.92f, 6, 1.25f), Quaternion.identity, 0);
 
         PhotonNetwork.Instantiate("Models/Prefab/Angry2", new Vector3(-3.44f, 4, -1.25f), Quaternion.identity, 0);
         PhotonNetwork.Instantiate("Models/Prefab/Crying2", new Vector3(-2.92f, 6, -1.25f), Quaternion.identity, 0);
