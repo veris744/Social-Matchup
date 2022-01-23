@@ -90,33 +90,16 @@ public class ClassicGameManager : GameManager
             if (Physics.Raycast(ray, out hit, 100))
             {
                 EmojiStruct emjStruct = StringToEmojiStruct(hit.transform.gameObject.name);
-                //OnClick(emjStruct);
                 photonView.RPC("OnClick", RpcTarget.All, emjStruct.number, emjStruct.emoji, emjStruct.emojiName, emjStruct.gameObjectName);
-                /*
-                if (thisPlayer.GetInstanceID() == 1001)
-                {
-                    Debug.Log("player 1001");
-                }
-                else
-                {
-                    if(thisPlayer.GetPhotonView().ViewID == 2001)
-                    {
-                        Debug.Log("player 2001");
-                    }
-                }
-                */
             }
         }
         if (String.Equals(selected1.emoji, selected2.emoji))
         {
-            Debug.Log(selected1.emojiName + "selected1 equals selected2" + selected2.emojiName);
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log("master client");
                 PhotonNetwork.Destroy(GameObject.Find(selected1.gameObjectName));
                 PhotonNetwork.Destroy(GameObject.Find(selected2.gameObjectName).gameObject);
             }
-
             ResetSelected1();
             ResetSelected2();
         }
@@ -190,14 +173,7 @@ public class ClassicGameManager : GameManager
                     GameObject.Find(goName).transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
-            else
-            {
-                Debug.Log("structEmoji.number is different to 1 or 2");
-            }
-
         }
-        Debug.Log("selected1" + selected1.number + selected1.emojiName + selected1.gameObjectName);
-        Debug.Log("selected2" + selected2.number + selected2.emojiName + selected2.gameObjectName);
     }
 
     void victory()
