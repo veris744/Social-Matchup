@@ -81,7 +81,7 @@ public class ClassicGameManager : GameManager
             init++;
             if (PhotonNetwork.IsMasterClient)
             {
-                SpawnEmojis();
+                photonView.RPC("SpawnEmojis", RpcTarget.All, null);
             }
         }
 
@@ -186,7 +186,7 @@ public class ClassicGameManager : GameManager
         return array;
     }
 
-
+    [PunRPC]
     public void SpawnEmojis()
     {
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", new Vector3(0.91f, 4, 1.25f), Quaternion.identity, 0);
