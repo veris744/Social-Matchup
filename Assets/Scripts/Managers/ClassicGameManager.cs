@@ -85,6 +85,7 @@ public class ClassicGameManager : GameManager
             }
         }
 
+
         if (angry1 && angry2)
         {
             Destroy(GameObject.Find("Angry1(Clone)"));
