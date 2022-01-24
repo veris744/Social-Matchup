@@ -275,6 +275,23 @@ public class ClassicGameManager : GameManager
     void selectAngry1(bool b)
     {
         angry1 = b;
+        clickEmbarassed1();
+        clickSmiling1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickAngry2()
@@ -297,6 +314,23 @@ public class ClassicGameManager : GameManager
     void selectAngry2(bool b)
     {
         angry2 = b;
+        clickEmbarassed2();
+        clickSmiling2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
@@ -323,6 +357,28 @@ public class ClassicGameManager : GameManager
     void selectEmbarassed1(bool b)
     {
         embarassed1 = b;
+
+        clickSmiling1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickEmbarassed2()
@@ -344,6 +400,27 @@ public class ClassicGameManager : GameManager
     void selectEmbarassed2(bool b)
     {
         embarassed2 = b;
+
+        clickSmiling2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
@@ -372,6 +449,25 @@ public class ClassicGameManager : GameManager
     void selectCrying1(bool b)
     {
         crying1 = b;
+
+        clickEmbarassed1();
+        clickSmiling1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickCrying2()
@@ -393,6 +489,23 @@ public class ClassicGameManager : GameManager
     void selectCrying2(bool b)
     {
         crying2 = b;
+        clickEmbarassed2();
+        clickSmiling2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
@@ -419,6 +532,24 @@ public class ClassicGameManager : GameManager
     void selectSurprised1(bool b)
     {
         surprised1 = b;
+        clickEmbarassed1();
+        clickSmiling1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
     }
 
     public void clickSurprised2()
@@ -440,6 +571,23 @@ public class ClassicGameManager : GameManager
     void selectSurprised2(bool b)
     {
         surprised2 = b;
+        clickEmbarassed2();
+        clickSmiling2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
     }
 
 
@@ -465,6 +613,23 @@ public class ClassicGameManager : GameManager
     void selectInvolve1(bool b)
     {
         involve1 = b;
+        clickEmbarassed1();
+        clickSmiling1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickInvolve2()
@@ -486,6 +651,22 @@ public class ClassicGameManager : GameManager
     void selectInvolve2(bool b)
     {
         involve2 = b;
+        clickEmbarassed2();
+        clickSmiling2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
@@ -510,6 +691,27 @@ public class ClassicGameManager : GameManager
     void selectSmiling1(bool b)
     {
         smiling1 = b;
+        clickEmbarassed1();
+        clickLaughing1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickSmiling2()
@@ -531,6 +733,26 @@ public class ClassicGameManager : GameManager
     void selectSmiling2(bool b)
     {
         smiling2 = b;
+        clickEmbarassed2();
+        clickLaughing2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
@@ -556,6 +778,27 @@ public class ClassicGameManager : GameManager
     void selectLaughing1(bool b)
     {
         laughing1 = b;
+        clickEmbarassed1();
+        clickSmiling1();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying1();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry1();
+
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised1();
+        }
     }
 
     public void clickLaughing2()
@@ -577,6 +820,26 @@ public class ClassicGameManager : GameManager
     void selectLaughing2(bool b)
     {
         laughing2 = b;
+        clickEmbarassed2();
+        clickSmiling2();
+
+        if (PhotonManager.instance.NumberOfImages >= 4)
+        {
+            clickCrying2();
+        }
+        if (PhotonManager.instance.NumberOfImages >= 5)
+        {
+            clickInvolve2();
+
+        }
+        if (PhotonManager.instance.NumberOfImages >= 6)
+        {
+            clickAngry2();
+        }
+        if (PhotonManager.instance.NumberOfImages == 7)
+        {
+            clickSurprised2();
+        }
     }
 
 
