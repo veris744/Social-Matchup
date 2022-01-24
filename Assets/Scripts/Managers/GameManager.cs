@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
                         if (PhotonNetwork.IsMasterClient)
                         {
                             GameObject.Find("Canvas1").GetComponent<Canvas>().worldCamera =
-                                player.transform.Find("Camera Offset").Find("Camera Offset").Find("Main Camera").GetComponent<Camera>();
+                                player.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>();
                         }
                         else
                         {
                             GameObject.Find("Canvas2").GetComponent<Canvas>().worldCamera =
-                                player.transform.Find("Camera Offset").Find("Camera Offset").Find("Main Camera").GetComponent<Camera>();
+                                player.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>();
                         }
 
                     }
