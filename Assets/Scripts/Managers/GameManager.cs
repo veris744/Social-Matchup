@@ -33,14 +33,18 @@ public class GameManager : MonoBehaviour
                 foreach (GameObject player in players)
                 {
                     Debug.Log("Player: " + player.GetPhotonView().IsMine);
-                    player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(false);
+                    player.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
+                    player.transform.Find("RightHand Controller").gameObject.SetActive(false);
+                    player.transform.Find("LeftHand Controller").gameObject.SetActive(false);
 
                     if (player.GetPhotonView().IsMine)
                     {
                         Debug.Log("Player Mine: " + player.GetPhotonView().ViewID);
                         thisPlayer = player.gameObject;
 
-                        player.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+                        player.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = true;
+                        player.transform.Find("RightHand Controller").gameObject.SetActive(true);
+                        player.transform.Find("LeftHand Controller").gameObject.SetActive(true);
                         CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
@@ -54,14 +58,18 @@ public class GameManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
             helper = GameObject.FindGameObjectsWithTag("Helper")[0];
-            helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(false);
+            helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
+            helper.transform.Find("RightHand Controller").gameObject.SetActive(false);
+            helper.transform.Find("LeftHand Controller").gameObject.SetActive(false);
             if (helper.GetPhotonView().IsMine)
             {
                 thisPlayer = PhotonManager.instance.Helper;
                 Debug.Log("Player Mine: " + helper.GetInstanceID());
                 thisPlayer = helper.gameObject;
 
-                helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.SetActive(true);
+                helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = true;
+                helper.transform.Find("RightHand Controller").gameObject.SetActive(true);
+                helper.transform.Find("LeftHand Controller").gameObject.SetActive(true);
                 CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(helper.transform);
