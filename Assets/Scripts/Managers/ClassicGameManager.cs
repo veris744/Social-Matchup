@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ClassicGameManager : GameManager
 {
@@ -15,6 +16,8 @@ public class ClassicGameManager : GameManager
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
     Vector3[] positionsArray;
     PhotonView photonView;
+    GameObject XRinteractionManager;
+
     bool objectCreated;
     bool finished1;
     bool finished2;
@@ -69,6 +72,8 @@ public class ClassicGameManager : GameManager
         laughing2 = false;
 
         done = false;
+
+        XRinteractionManager = GameObject.Find("XR Interaction Manager");
     }
 
 
@@ -190,65 +195,49 @@ public class ClassicGameManager : GameManager
     public void SpawnEmojis()
     {
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed1", new Vector3(0.91f, 4, 1.25f), Quaternion.identity, 0);
+        GameObject.Find("Embarassed1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         PhotonNetwork.Instantiate("Models/Prefab/Laughing1", new Vector3(0f, 6, 1.25f), Quaternion.identity, 0);
+        GameObject.Find("Laughing1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         PhotonNetwork.Instantiate("Models/Prefab/Involve1", new Vector3(-1.42f, 4, 1.25f), Quaternion.identity, 0);
+        GameObject.Find("Involve1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
 
         PhotonNetwork.Instantiate("Models/Prefab/Embarassed2", new Vector3(-1.42f, 4, -1.25f), Quaternion.identity, 0);
+        GameObject.Find("Embarassed2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         PhotonNetwork.Instantiate("Models/Prefab/Laughing2", new Vector3(0f, 6, -1.25f), Quaternion.identity, 0);
+        GameObject.Find("Laughing2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         PhotonNetwork.Instantiate("Models/Prefab/Involve2", new Vector3(0.91f, 4, -1.25f), Quaternion.identity, 0);
-
-        GameObject angryButton1 = GameObject.Find("angryButton1");
-        angryButton1.gameObject.SetActive(false);
-        GameObject cryingButton1 = GameObject.Find("cryingButton1");
-        cryingButton1.gameObject.SetActive(false);
-        GameObject smilingButton1 = GameObject.Find("smilingButton1");
-        smilingButton1.gameObject.SetActive(false);
-        GameObject surprisedButton1 = GameObject.Find("surprisedButton1");
-        surprisedButton1.gameObject.SetActive(false);
-
-        GameObject angryButton2 = GameObject.Find("angryButton2");
-        angryButton2.gameObject.SetActive(false);
-        GameObject cryingButton2 = GameObject.Find("cryingButton2");
-        cryingButton2.gameObject.SetActive(false);
-        GameObject smilingButton2 = GameObject.Find("smilingButton2");
-        smilingButton2.gameObject.SetActive(false);
-        GameObject surprisedButton2 = GameObject.Find("surprisedButton2");
-        surprisedButton2.gameObject.SetActive(false);
-
+        GameObject.Find("Involve2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
 
 
         if (PhotonManager.instance.NumberOfImages >= 4) 
         {
             PhotonNetwork.Instantiate("Models/Prefab/Crying1", new Vector3(2.57f, 6, 1.25f), Quaternion.identity, 0);
+            GameObject.Find("Crying1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
             PhotonNetwork.Instantiate("Models/Prefab/Crying2", new Vector3(-2.92f, 6, -1.25f), Quaternion.identity, 0);
-            cryingButton1.gameObject.SetActive(true);
-            cryingButton2.gameObject.SetActive(true);
+            GameObject.Find("Crying2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         }
         if (PhotonManager.instance.NumberOfImages >= 5)
         {
             PhotonNetwork.Instantiate("Models/Prefab/Smiling1", new Vector3(-3.44f, 4, 1.25f), Quaternion.identity, 0);
+            GameObject.Find("Smiling1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
             PhotonNetwork.Instantiate("Models/Prefab/Smiling2", new Vector3(3.89f, 4, -1.25f), Quaternion.identity, 0);
-            smilingButton1.gameObject.SetActive(true);
-            smilingButton2.gameObject.SetActive(true);
+            GameObject.Find("Smiling2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         }
         if (PhotonManager.instance.NumberOfImages >= 6)
         {
             PhotonNetwork.Instantiate("Models/Prefab/Angry1", new Vector3(3.89f, 4, 1.25f), Quaternion.identity, 0);
+            GameObject.Find("Angry1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
             PhotonNetwork.Instantiate("Models/Prefab/Angry2", new Vector3(-3.44f, 4, -1.25f), Quaternion.identity, 0);
-            angryButton1.gameObject.SetActive(true);
-            angryButton2.gameObject.SetActive(true);
+            GameObject.Find("Angry2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
 
         }
         if (PhotonManager.instance.NumberOfImages == 7)
         {
             PhotonNetwork.Instantiate("Models/Prefab/Surprised1", new Vector3(-2.92f, 6, 1.25f), Quaternion.identity, 0);
+            GameObject.Find("Surprised1(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
             PhotonNetwork.Instantiate("Models/Prefab/Surprised2", new Vector3(2.57f, 6, -1.25f), Quaternion.identity, 0);
-            surprisedButton1.gameObject.SetActive(true);
-            surprisedButton2.gameObject.SetActive(true);
+            GameObject.Find("Surprised2(Clone)").GetComponent<XRSimpleInteractable>().interactionManager = XRinteractionManager.GetComponent<XRInteractionManager>();
         }
-
-
-
 
         objectCreated = true;
     }
@@ -256,18 +245,15 @@ public class ClassicGameManager : GameManager
 
     public void clickAngry1()
     {
-        Debug.Log("click");
         if (!angry1)
         {
             GameObject.Find("Angry1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectAngry1", RpcTarget.All, b);
+            photonView.RPC("selectAngry1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Angry1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectAngry1", RpcTarget.All, b);
+            photonView.RPC("selectAngry1", RpcTarget.All, false);
         }
 
     }
@@ -282,14 +268,12 @@ public class ClassicGameManager : GameManager
         if (!angry2)
         {
             GameObject.Find("Angry2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectAngry2", RpcTarget.All, b);
+            photonView.RPC("selectAngry2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Angry2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectAngry2", RpcTarget.All, b);
+            photonView.RPC("selectAngry2", RpcTarget.All, false);
         }
 
     }
@@ -308,14 +292,12 @@ public class ClassicGameManager : GameManager
         if (!embarassed1)
         {
             GameObject.Find("Embarassed1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectEmbarassed1", RpcTarget.All, b);
+            photonView.RPC("selectEmbarassed1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Embarassed1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectEmbarassed1", RpcTarget.All, b);
+            photonView.RPC("selectEmbarassed1", RpcTarget.All, false);
         }
 
     }
@@ -330,14 +312,12 @@ public class ClassicGameManager : GameManager
         if (!embarassed2)
         {
             GameObject.Find("Embarassed2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectEmbarassed2", RpcTarget.All, b);
+            photonView.RPC("selectEmbarassed2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Embarassed2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectEmbarassed2", RpcTarget.All, b);
+            photonView.RPC("selectEmbarassed2", RpcTarget.All, false);
         }
     }
     [PunRPC]
@@ -357,14 +337,12 @@ public class ClassicGameManager : GameManager
         if (!crying1)
         {
             GameObject.Find("Crying1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectCrying1", RpcTarget.All, b);
+            photonView.RPC("selectCrying1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Crying1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectCrying1", RpcTarget.All, b);
+            photonView.RPC("selectCrying1", RpcTarget.All, false);
         }
 
     }
@@ -379,14 +357,12 @@ public class ClassicGameManager : GameManager
         if (!crying2)
         {
             GameObject.Find("Crying2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectCrying2", RpcTarget.All, b);
+            photonView.RPC("selectCrying2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Crying2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectCrying2", RpcTarget.All, b);
+            photonView.RPC("selectCrying2", RpcTarget.All, false);
         }
     }
     [PunRPC]
@@ -404,14 +380,12 @@ public class ClassicGameManager : GameManager
         if (!surprised1)
         {
             GameObject.Find("Surprised1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectSurprised1", RpcTarget.All, b);
+            photonView.RPC("selectSurprised1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Surprised1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectSurprised1", RpcTarget.All, b);
+            photonView.RPC("selectSurprised1", RpcTarget.All, false);
         }
 
     }
@@ -426,14 +400,12 @@ public class ClassicGameManager : GameManager
         if (!surprised2)
         {
             GameObject.Find("Surprised2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectSurprised2", RpcTarget.All, b);
+            photonView.RPC("selectSurprised2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Surprised2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectSurprised2", RpcTarget.All, b);
+            photonView.RPC("selectSurprised2", RpcTarget.All, false);
         }
     }
     [PunRPC]
@@ -450,14 +422,12 @@ public class ClassicGameManager : GameManager
         if (!involve1)
         {
             GameObject.Find("Involve1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectInvolve1", RpcTarget.All, b);
+            photonView.RPC("selectInvolve1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Involve1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectInvolve1", RpcTarget.All, b);
+            photonView.RPC("selectInvolve1", RpcTarget.All, false);
         }
 
     }
@@ -472,14 +442,12 @@ public class ClassicGameManager : GameManager
         if (!involve2)
         {
             GameObject.Find("Involve2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectInvolve2", RpcTarget.All, b);
+            photonView.RPC("selectInvolve2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Involve2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectInvolve2", RpcTarget.All, b);
+            photonView.RPC("selectInvolve2", RpcTarget.All, false);
         }
     }
     [PunRPC]
@@ -495,14 +463,12 @@ public class ClassicGameManager : GameManager
         if (!smiling1)
         {
             GameObject.Find("Smiling1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectSmiling1", RpcTarget.All, b);
+            photonView.RPC("selectSmiling1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Smiling1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectSmiling1", RpcTarget.All, b);
+            photonView.RPC("selectSmiling1", RpcTarget.All, false);
         }
 
     }
@@ -517,14 +483,12 @@ public class ClassicGameManager : GameManager
         if (!smiling2)
         {
             GameObject.Find("Smiling2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectSmiling2", RpcTarget.All, b);
+            photonView.RPC("selectSmiling2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Smiling2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectSmiling2", RpcTarget.All, b);
+            photonView.RPC("selectSmiling2", RpcTarget.All, false);
         }
     }
     [PunRPC]
@@ -541,14 +505,12 @@ public class ClassicGameManager : GameManager
         if (!laughing1)
         {
             GameObject.Find("Laughing1(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectLaughing1", RpcTarget.All, b);
+            photonView.RPC("selectLaughing1", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Laughing1(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectLaughing1", RpcTarget.All, b);
+            photonView.RPC("selectLaughing1", RpcTarget.All, false);
         }
 
     }
@@ -563,14 +525,12 @@ public class ClassicGameManager : GameManager
         if (!laughing2)
         {
             GameObject.Find("Laughing2(Clone)").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            bool b = true;
-            photonView.RPC("selectLaughing2", RpcTarget.All, b);
+            photonView.RPC("selectLaughing2", RpcTarget.All, true);
         }
         else
         {
             GameObject.Find("Laughing2(Clone)").transform.localScale = new Vector3(1f, 1f, 1f);
-            bool b = false;
-            photonView.RPC("selectLaughing2", RpcTarget.All, b);
+            photonView.RPC("selectLaughing2", RpcTarget.All, false);
         }
     }
     [PunRPC]
