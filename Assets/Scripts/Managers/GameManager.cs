@@ -11,24 +11,16 @@ public class GameManager : MonoBehaviour
     protected GameObject helper;
     protected bool pvp;
 
-    public GameObject defaultCamera;
-
-    PhotonView photonView;
 
     // Start is called before the first frame update
     void Start()
     {
         this.pvp = PhotonManager.instance.pvp;
-        this.photonView = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (defaultCamera.activeSelf)
-        {
-            photonView.RPC("setObjectPosition", RpcTarget.All, "DefaultCamera", new Vector3(28, 3.5f, -3));
-        }
 
         if ((pvp && (players == null || players.Length < 4)) || (!pvp && (players == null || players.Length < 2)))
         {
@@ -97,11 +89,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    [PunRPC]
-    void setObjectPosition(string name, Vector3 v)
-    {
-        GameObject.Find("DefaultCamera").transform.position = v;
-    }
 
     public void SetPVP(bool pvp)
     {
