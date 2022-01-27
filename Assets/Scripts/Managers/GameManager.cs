@@ -11,11 +11,16 @@ public class GameManager : MonoBehaviour
     protected GameObject helper;
     protected bool pvp;
 
+    bool defaultCamera;
+    bool rotated;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("GameManger name: " + gameObject.name);
         this.pvp = PhotonManager.instance.pvp;
+        defaultCamera = true;
+        rotated = false;
     }
 
     // Update is called once per frame
@@ -32,47 +37,67 @@ public class GameManager : MonoBehaviour
 
                 foreach (GameObject player in players)
                 {
-                    Debug.Log("Player: " + player.GetPhotonView().IsMine);
-                    player.transform.Find("Camera Offset").gameObject.SetActive(false);
 
                     if (player.GetPhotonView().IsMine)
                     {
-                        Debug.Log("Player Mine: " + player.GetPhotonView().ViewID);
                         thisPlayer = player.gameObject;
 
-                        player.transform.Find("Camera Offset").gameObject.SetActive(true);
                         CameraController cameraController = player.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                         cameraController.enabled = true;
                         cameraController.SetTarget(player.transform);
                         player.transform.Find("BaseAvatar").gameObject.SetActive(false);
+
                     }
+                    else
+                    {
+                        player.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
+                        player.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(false);
+                        player.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(false);
+                    }
+
                 }
 
             }
+
         }
 
         if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
         {
             helper = GameObject.FindGameObjectsWithTag("Helper")[0];
-            helper.transform.Find("Camera Offset").gameObject.SetActive(false);
+            helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
+            helper.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(false);
+            helper.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(false);
             if (helper.GetPhotonView().IsMine)
             {
                 thisPlayer = PhotonManager.instance.Helper;
                 Debug.Log("Player Mine: " + helper.GetInstanceID());
                 thisPlayer = helper.gameObject;
 
-                helper.transform.Find("Camera Offset").gameObject.SetActive(true);
+                helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = true;
+                helper.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(true);
+                helper.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(true);
                 CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
                 cameraController.enabled = true;
                 cameraController.SetTarget(helper.transform);
                 helper.transform.Find("Avatar").gameObject.SetActive(false);
             }
+            if (!rotated)
+            {
+                rotated = true;
+                helper.transform.Rotate(new Vector3(0, -90, 0));
+            }
+        }
+
+    
+        if (thisPlayer != null && defaultCamera)
+        {
+            GameObject.Find("DefaultCamera").SetActive(false);
+            defaultCamera = false;
         }
 
 
-
-        Debug.Log("IsPlaying = " + AudioManager.instance.gameObject.GetComponent<AudioSource>().isPlaying);
     }
+
 
     public void SetPVP(bool pvp)
     {
@@ -80,46 +105,4 @@ public class GameManager : MonoBehaviour
     }
 
 
-    [PunRPC]
-    public void StartVictoryAnimations()
-    {
-        StartCoroutine(OnVictory());
-    }
-    /*
-    [PunRPC]
-    public void PvpHurraySound(int teamIndex)
-    {
-        if (GetTeam(thisPlayer.gameObject.GetPhotonView().Owner.ActorNumber) == teamIndex)
-            AudioManager.instance.PlayHurraySound();
-    }*/
-
-    protected IEnumerator OnVictory()
-    {
-        yield return new WaitForSeconds(1);
-        AudioManager.instance.PlayHurraySound();
-        yield return new WaitForSeconds(3);
-        AudioManager.instance.StopMusic();
-        yield return new WaitForSeconds(2);
-        AudioManager.instance.PlayVictorySound();
-
-        Debug.Log("thisPlayer = " + thisPlayer.name);
-        Debug.Log("BlackPanel = " + thisPlayer.transform.Find("BlackPanel").name);
-        Debug.Log("Sprite renderer = " + thisPlayer.transform.Find("BlackPanel").GetComponent<SpriteRenderer>().ToString());
-
-        SpriteRenderer endGamePanel = thisPlayer.transform.Find("BlackPanel").GetComponent<SpriteRenderer>();
-        endGamePanel.color = Color.black;
-
-        yield return new WaitForSeconds(6);
-        SceneManager.LoadScene("MainMenu");
-
-        PhotonNetwork.LeaveRoom();
-    }
-
-    /*
-    public int GetTeam(int playerId)
-    {
-        if (playerId >= 1 && playerId <= 2) return 1;
-        if (playerId >= 3 && playerId <= 4) return 2;
-        return 0;
-    }*/
 }
