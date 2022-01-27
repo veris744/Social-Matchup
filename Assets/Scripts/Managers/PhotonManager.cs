@@ -194,7 +194,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject player;
         yield return new WaitForSeconds(5f);
 
-        player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, -8), Quaternion.identity, 0);
+        player = PhotonNetwork.Instantiate("Player", new Vector3(-53, 3, -8), Quaternion.identity, 0);
 
         
 
@@ -209,7 +209,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(5f);
 
-        helper = PhotonNetwork.Instantiate("Helper", new Vector3(9.5f, 2, 0), Quaternion.identity, 0);
+        helper = PhotonNetwork.Instantiate("Helper", new Vector3(-43.5f, 2, 0), Quaternion.identity, 0);
 
 
         //enabling audio listener 
@@ -224,7 +224,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5f);
         GameObject player;
 
-        player = PhotonNetwork.Instantiate("Player", new Vector3(0, 3, 8), new Quaternion(0, 1, 0, 0), 0);
+        player = PhotonNetwork.Instantiate("Player", new Vector3(-53, 3, 8), new Quaternion(0, 1, 0, 0), 0);
 
         //enabling audio listener 
         player.GetComponent<AudioListener>().enabled = true;

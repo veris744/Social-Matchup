@@ -11,11 +11,16 @@ public class GameManager : MonoBehaviour
     protected GameObject helper;
     protected bool pvp;
 
+    bool defaultCamera;
+    bool rotated;
+
 
     // Start is called before the first frame update
     void Start()
     {
         this.pvp = PhotonManager.instance.pvp;
+        defaultCamera = true;
+        rotated = false;
     }
 
     // Update is called once per frame
@@ -54,36 +59,40 @@ public class GameManager : MonoBehaviour
 
             }
 
+        }
 
-            if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
+        if (GameObject.FindGameObjectsWithTag("Helper").Length == 1)
+        {
+            helper = GameObject.FindGameObjectsWithTag("Helper")[0];
+            helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
+            helper.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(false);
+            helper.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(false);
+            if (helper.GetPhotonView().IsMine)
             {
-                helper = GameObject.FindGameObjectsWithTag("Helper")[0];
-                if (helper.GetPhotonView().IsMine)
-                {
-                    thisPlayer = PhotonManager.instance.Helper;
-                    thisPlayer = helper.gameObject;
+                thisPlayer = PhotonManager.instance.Helper;
+                Debug.Log("Player Mine: " + helper.GetInstanceID());
+                thisPlayer = helper.gameObject;
 
-                    CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
-                    cameraController.enabled = true;
-                    cameraController.SetTarget(helper.transform);
-                    helper.transform.Find("Avatar").gameObject.SetActive(false);
-                }
-                else
-                {
-                    helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = false;
-                    helper.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(false);
-                    helper.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(false);
-                }
-
+                helper.transform.Find("Camera Offset").Find("Main Camera").GetComponent<Camera>().enabled = true;
+                helper.transform.Find("Camera Offset").Find("RightHand Controller").gameObject.SetActive(true);
+                helper.transform.Find("Camera Offset").Find("LeftHand Controller").gameObject.SetActive(true);
+                CameraController cameraController = helper.transform.Find("Camera Offset").Find("Main Camera").gameObject.GetComponent<CameraController>();
+                cameraController.enabled = true;
+                cameraController.SetTarget(helper.transform);
+                helper.transform.Find("Avatar").gameObject.SetActive(false);
             }
-
-
-            if (thisPlayer != null)
+            if (!rotated)
             {
-                GameObject.Find("DefaultCamera").SetActive(false);
-
+                rotated = true;
+                helper.transform.Rotate(new Vector3(0, -90, 0));
             }
+        }
 
+    
+        if (thisPlayer != null && defaultCamera)
+        {
+            GameObject.Find("DefaultCamera").SetActive(false);
+            defaultCamera = false;
         }
 
 
