@@ -14,7 +14,8 @@ public class ClassicGameManager : GameManager
 
     Vector3 baseEmojiPosition1 = new Vector3(0, 3, 1.1f);
     Vector3 baseEmojiPosition2 = new Vector3(0, 3, -1.1f);
-    Vector3[] positionsArray;
+    Vector3[] positionsArray1;
+    Vector3[] positionsArray2;
     PhotonView photonView;
     GameObject XRinteractionManager;
 
@@ -47,8 +48,10 @@ public class ClassicGameManager : GameManager
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        positionsArray = new[] { new Vector3(0f, 0f, 0f), new Vector3(1.2f, 0f, 0f), new Vector3(-1.2f, 0f, 0f),
-            new Vector3(0.6f, -1f, 0f), new Vector3(-0.6f, -1f, 0f), new Vector3(1.8f, -1f, 0f), new Vector3(-1.8f, -1f, 0f) };
+        positionsArray1 = new[] { new Vector3(-52.09f, 4, 1.25f), new Vector3(-53f, 6, 1.25f), new Vector3(-54.42f, 4, 1.25f),
+            new Vector3(-50.43f, 6, 1.25f), new Vector3(-56.44f, 4, 1.25f), new Vector3(-49.11f, 4, 1.25f), new Vector3(-55.92f, 6, 1.25f) };
+        positionsArray2 = new[] { new Vector3(-52.09f, 4, -1.25f), new Vector3(-53f, 6, -1.25f), new Vector3(-54.42f, 4, -1.25f),
+            new Vector3(-50.43f, 6,-1.25f), new Vector3(-56.44f, 4, -1.25f), new Vector3(-49.11f, 4, -1.25f), new Vector3(-55.92f, 6, -1.25f) };
 
         objectCreated = false;
         finished1 = false;
@@ -172,20 +175,23 @@ public class ClassicGameManager : GameManager
     [PunRPC]
     public void SpawnEmojis()
     {
-        GameObject.Find("Embarassed1").transform.position = new Vector3(-52.09f, 4, 1.25f);
-        GameObject.Find("Laughing1").transform.position = new Vector3(-53f, 6, 1.25f);
-        GameObject.Find("Involve1").transform.position = new Vector3(-54.42f, 4, 1.25f);
+        Vector3[] v1 = Shuffle(positionsArray1);
+        Vector3[] v2 = Shuffle(positionsArray2);
+
+        GameObject.Find("Embarassed1").transform.position = v1[0];
+        GameObject.Find("Laughing1").transform.position = v1[1];
+        GameObject.Find("Involve1").transform.position = v1[2];
 
 
-        GameObject.Find("Embarassed2").transform.position = new Vector3(-54.42f, 4, -1.25f);
-        GameObject.Find("Laughing2").transform.position = new Vector3(-53f, 6, -1.25f);
-        GameObject.Find("Involve2").transform.position = new Vector3(-52.09f, 4, -1.25f);
+        GameObject.Find("Embarassed2").transform.position = v2[0];
+        GameObject.Find("Laughing2").transform.position = v2[1];
+        GameObject.Find("Involve2").transform.position = v2[2];
 
 
         if (PhotonManager.instance.NumberOfImages >= 4)
         {
-            GameObject.Find("Crying1").transform.position = new Vector3(-50.43f, 6, 1.25f);
-            GameObject.Find("Crying2").transform.position = new Vector3(-55.92f, 6, -1.25f);
+            GameObject.Find("Crying1").transform.position = v1[3];
+            GameObject.Find("Crying2").transform.position = v2[3];
         } else
         {
             Destroy(GameObject.Find("Crying1"));
@@ -193,8 +199,8 @@ public class ClassicGameManager : GameManager
         }
         if (PhotonManager.instance.NumberOfImages >= 5)
         {
-            GameObject.Find("Smiling1").transform.position = new Vector3(-56.44f, 4, 1.25f);
-            GameObject.Find("Smiling2").transform.position = new Vector3(-49.11f, 4, -1.25f);
+            GameObject.Find("Smiling1").transform.position = v1[4];
+            GameObject.Find("Smiling2").transform.position = v2[4];
         }
         else
         {
@@ -203,8 +209,8 @@ public class ClassicGameManager : GameManager
         }
         if (PhotonManager.instance.NumberOfImages >= 6)
         {
-            GameObject.Find("Angry1").transform.position = new Vector3(-49.11f, 4, 1.25f);
-            GameObject.Find("Angry2").transform.position = new Vector3(-56.44f, 4, -1.25f);
+            GameObject.Find("Angry1").transform.position = v1[5];
+            GameObject.Find("Angry2").transform.position = v2[5];
         }
         else
         {
@@ -213,8 +219,8 @@ public class ClassicGameManager : GameManager
         }
         if (PhotonManager.instance.NumberOfImages == 7)
         {
-            GameObject.Find("Surprised1").transform.position = new Vector3(-55.92f, 6, 1.25f);
-            GameObject.Find("Surprised2").transform.position = new Vector3(-50.43f, 6, -1.25f);
+            GameObject.Find("Surprised1").transform.position = v1[6];
+            GameObject.Find("Surprised2").transform.position = v2[6];
         }
         else
         {
